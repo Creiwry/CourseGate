@@ -53,6 +53,7 @@ Course Gate is a web application that allows students to enroll in courses and i
 
 5. Start the server:
     ```shell
+    rails server
     ```
 
 6. Open your web browser and access the application at `http://localhost:3000`.
