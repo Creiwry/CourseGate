@@ -26,7 +26,8 @@ puts "students destroyed #{Student.count}" if Student.destroy_all
   Instructor.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    password_digest: 'password',
+    password: 'password',
+    password_confirmation: 'password',
     bio: Faker::Lorem.paragraph(sentence_count: 3)
   )
 end
@@ -45,7 +46,8 @@ end
   Student.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    password: 'password'
+    password: 'password',
+    password_confirmation: 'password'
   )
 end
 

@@ -1,5 +1,19 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: forum_threads
+#
+#  id         :bigint           not null, primary key
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  course_id  :integer
+#
+# Indexes
+#
+#  index_forum_threads_on_course_id  (course_id)
+#
 require 'spec_helper'
 
 RSpec.describe ForumThread, type: :model do
