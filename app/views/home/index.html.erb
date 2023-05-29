@@ -1,1 +1,86 @@
-<h1>Hello CourseGate!</h1>
+<div class="heading text-center">
+  
+  <h1 class="center">CourseGate!</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div id="course-list" class="col-sm  align-self-center course-list">
+      <div class="carousel slide" data-bs-ride="carousel">
+        
+        <div class="carousel-inner">
+         <%# ##TODO: make it so the first card doesn't repeat  %>
+          <div class="carousel-item card active">
+            <div class="card-body">
+              <h4 class="card-title">
+                <%= @courses.first.name %>
+              </h4>
+              <p class="card-text">
+                <%= @courses.first.description %>
+              </p>
+                <%=  link_to "Go to course", @courses.first, class:"card-link" %>
+              
+            </div>
+
+            
+          </div>
+          <% @courses.each do |course| %>
+
+            <div class="carousel-item card">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <%= course.name %>
+                </h4>
+                <p class="card-text">
+                  <%= course.description %>
+                </p>
+                  <%=  link_to "Go to course", course, class:"card-link" %>
+                
+              </div>
+
+              
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+
+    <div id="introduction" class="col-sm align-self-center card">
+      <div id="introduction-text" class="card-body">
+        <h3 class="card-title">
+          Introduction  
+        </h3>
+
+        <p class="card-text">
+        We believe that education should be a collective effort, so we've created a platform where instructors and learners come together to create an engaging learning experience.
+        Explore a diverse range of courses, and participate in interactive discussions facilitated by both community members and expert instructors.
+        Join us today and unlock a world of collaborative education at CourseGate!
+        </p>
+
+        <%= link_to "About Us", :about_us, class:"card-link" %>
+        <%= link_to "FAQ Page", :faq, class:"card-link" %>
+      </div> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="forum-threads-home-page" class="col-sm" >
+      <h3>Forum Threads</h3>
+      <ul id="forum-threads" class="column-count-2">
+        <% @forum_threads.each do |forum_thread| %>
+          <li>
+            <%= link_to forum_thread.title, forum_thread %>
+          </li>
+        <% end %>
+      </ul>
+
+      
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="testimonials" class="col-sm">
+      
+    </div>
+  </div>
+</div>
