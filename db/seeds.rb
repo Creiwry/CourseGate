@@ -104,7 +104,8 @@ Course.all.each do |course|
   5.times do
     ForumThread.create!(
       course_id: course.id,
-      title: Faker::Lorem.sentence
+      title: Faker::Lorem.sentence,
+      description: Faker::Lorem.paragraph(sentence_count: 5)
     )
   end
 end
