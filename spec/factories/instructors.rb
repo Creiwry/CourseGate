@@ -24,7 +24,8 @@ FactoryBot.define do
   factory :instructor do
     name { Faker::Name.name }
     email { Faker::Internet.email }
-    password_digest { 'password' }
+    password { 'password' }
+    password_confirmation { 'password' }
     bio { Faker::Lorem.paragraph }
   end
 end
