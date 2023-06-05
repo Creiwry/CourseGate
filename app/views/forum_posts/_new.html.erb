@@ -1,0 +1,6 @@
+<%= form_with model: @forum_post do |forum_post| %>
+<%# TODO: make it work %>
+  <%= forum_post.text_field :forum_thread_id, value: forum_thread_id, class: "d-none" %>
+  <%= forum_post.text_area :content %>
+  <%= forum_post.submit "Post" %>
+<% end %>

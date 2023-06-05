@@ -9,6 +9,9 @@
   <div>
     <p><%= @course.description %></p>
   </div>
+  <div>
+    <%= link_to "Enroll", new_enrollment_path(course_id: @course.id) %>
+  </div>
 
   <div>
     <h5>

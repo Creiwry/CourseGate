@@ -1,0 +1,12 @@
+<div id="forum-thread" class="container">
+  <h3><%= @forum_thread.title %></h3>
+  <div class="card">
+    <div class="card-body">
+      <%= @forum_thread.description %>
+    </div>
+    <%= render partial:"forum_posts/new", locals: {forum_thread_id: @forum_thread.id} %> 
+    
+  </div>
+  <%= render partial: "forum_posts/forum_posts", collection: @forum_posts %>
+  
+</div>

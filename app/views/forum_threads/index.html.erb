@@ -1,0 +1,10 @@
+<div id="forum-threads" calss="container">
+  <h3>Forum Threads</h3>
+  <ul class="column-count-2">
+    <% @forum_threads.each do |forum_thread| %>
+      <li>
+        <%= link_to forum_thread.title, forum_thread_path(forum_thread.id) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

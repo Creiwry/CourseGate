@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'faq', to: 'static#faq', as: :faq
   resources :courses
   resources :forum_threads
+  resources :forum_posts
+  resources :enrollments
 end
