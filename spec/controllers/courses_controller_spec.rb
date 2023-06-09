@@ -1,7 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe CoursesController, type: :controller do
+  let(:instructor) { create(:instructor) }
   let(:course) { create(:course) }
+
+  before do
+    sign_in(instructor)
+  end
 
   describe 'GET #index' do
     it 'returns a success response' do
@@ -40,7 +45,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #edit' do
     it 'returns a success response' do
       get :edit, params: { id: course.id }
-      expect(response).to be_successful 
+      expect(response).to be_successful
     end
   end
 

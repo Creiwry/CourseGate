@@ -19,5 +19,6 @@ FactoryBot.define do
   factory :forum_thread do
     course
     title { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
   end
 end

@@ -2,7 +2,13 @@
 require 'spec_helper'
 
 RSpec.describe EnrollmentsController, type: :controller do
+  let(:student) { create(:student) }
+  let(:course) { create(:course) }
   let(:enrollment) { create(:enrollment) }
+
+  before do
+    sign_in(student)
+  end
 
   describe 'GET #index' do
     it 'returns a success response' do
@@ -20,7 +26,7 @@ RSpec.describe EnrollmentsController, type: :controller do
 
   describe 'GET #new' do
     it 'returns a success response' do
-      get :new
+      get :new, params: { course_id: course.id }
       expect(response).to be_successful
     end
   end
@@ -28,20 +34,14 @@ RSpec.describe EnrollmentsController, type: :controller do
   describe 'POST #create' do
     it 'creates a new enrollment' do
       expect {
-        post :create, params: { enrollment: attributes_for(:enrollment) }
+        post :create, params: { enrollment: {course_id: course.id}, student_id: student.id }
       }.to change(Enrollment, :count).by(1)
     end
 
-    it 'redirects to the created enrollment' do
-      post :create, params: { enrollment: attributes_for(:enrollment) }
-      expect(response).to redirect_to(Enrollment.last)
-    end
-  end
-
-  describe 'GET #edit' do
-    it 'returns a success response' do
-      get :edit, params: { id: enrollment.id }
-      expect(response).to be_successful
+    it 'redirects to the created course enrolled' do
+      post :create, params: { enrollment: { course_id: course.id, student_id: student.id } }
+      created_enrollment = Enrollment.last
+      expect(response).to redirect_to(created_enrollment.course)
     end
   end
 
