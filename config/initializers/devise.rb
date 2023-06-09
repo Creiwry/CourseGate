@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'f271164d9ca9c9d2c90129525bb632d47bb0e29bca92b4a3ca93e63e5fff97e5f9d19265c8b6a36daa72f5ce4743cb551fe2a55c03a8732f11c2323d780ecca5'
+  # config.secret_key = '959982eee4e8820d918edb15fdbab4c4c20ae577ed491847f9b84269efb75fa524ccb984bd60c677183951a29ce64abba8eabca35e35ea773a745a9aced9e65a'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'adb7786fe1f129820c3518dd2340c11e182ad511219a2f4360e060ccfee8a7eec2bc54676d7e162e5bf353ada09ab1e174dfea82937a2c8b714f806ae75114d7'
+  # config.pepper = '7db49b4996cfcd96fee0a0f6286a8f10c99107c1f4ddd3c019ec1a856309daa89d1624037ec2d6bdbf8759fe1ad28f740910607155d43d82c110dfa151e26d44'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -244,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -263,7 +263,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  # config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
