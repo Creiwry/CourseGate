@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get 'about_us', to: 'static#about_us', as: :about_us
   get 'faq', to: 'static#faq', as: :faq
   resources :courses
-  resources :forum_threads
-  resources :forum_posts
+  resources :forum_threads do
+    resources :forum_posts
+  end
   resources :enrollments
 end
