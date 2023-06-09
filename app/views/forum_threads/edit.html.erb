@@ -1,0 +1,11 @@
+
+<div class="container">
+  <%= form_with(@forum_thread, forum_threads_path, method: patch) do |form| %>
+    <%# NOTE: add either instructor or student id to model to limit who can edit threads?  %>
+    <%= form.hidden :course_id, value: @forum_thread.course_id %>
+    <%= form.textarea :title, value: @forum_thread.title  %>
+    <%= form.textarea :description, value: @forum_thread.description %>
+    <%= form.submit 'Edit Thread' %>
+  <% end %>
+</div>
+
