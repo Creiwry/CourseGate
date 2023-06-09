@@ -1,6 +1,6 @@
-<%= form_with model: @forum_post do |forum_post| %>
+<%= form_with(model: @forum_post, url: forum_thread_forum_posts_path(@forum_thread), local: true) do |form| %>
 <%# TODO: make it work %>
-  <%= forum_post.text_field :forum_thread_id, value: forum_thread_id, class: "d-none" %>
-  <%= forum_post.text_area :content %>
-  <%= forum_post.submit "Post" %>
+  <%= form.hidden_field "forum_post[forum_thread_id]", value: params[:forum_thread_id] %>
+  <%= form.text_area "forum_post[content]" %>
+  <%= form.submit "Post" %>
 <% end %>
