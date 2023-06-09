@@ -28,4 +28,5 @@ class Instructor < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   has_many :courses
+  has_many :forum_threads, through: :courses
 end

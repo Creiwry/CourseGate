@@ -18,6 +18,7 @@
 class ForumThread < ApplicationRecord
   belongs_to :course
   has_many :forum_posts
+  has_one :instructor, through: :course
 
   validates :title, presence: true
 end
