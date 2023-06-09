@@ -1,0 +1,7 @@
+<div class="container">
+  <%= form_with(@course, url: courses_path, method: :patch) do |form| %>
+    <%= form.textarea :name, value: @course.name %>
+    <%= form.textarea :description, value: @course.description %>
+    <%= form.submit "Edit Course" %>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<div class="container">
+  <%= form_with(model: @course, url: courses_path, method: :post) do |form| %>
+    <%= form.textarea :name, value: "Enter name" %>
+    <%= form.textarea :description, value: "Enter description" %>
+    <%= form.submit "Create Course" %>
+  <% end %>
+</div>
