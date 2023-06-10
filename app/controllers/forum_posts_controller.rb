@@ -1,6 +1,6 @@
 class ForumPostsController < ApplicationController
   def index 
-    # @forum_posts = ForumPost.all
+    @forum_thread = ForumThread.find(params[:forum_thread_id])
   end
 
   def new
@@ -9,10 +9,15 @@ class ForumPostsController < ApplicationController
 
   def create
     @forum_thread = ForumThread.find(params[:forum_thread_id])
-    @forum_post = ForumPost.new(forum_post_params.merge(student_id: current_student.id, forum_thread_id: @forum_thread.id))
+    @forum_post = ForumPost.new(
+      forum_post_params.merge(
+        student_id: current_student.id,
+        forum_thread_id: @forum_thread.id
+      )
+    )
     if @forum_post.save!
       flash[:notice] = "Post created successfully"
-      render 'forum_threads/show', locals: { forum_thread: @forum_thread }
+      redirect_to forum_thread_path(@forum_thread)
     else
       flash[:notice] = "Failed to create post"
       render :new
@@ -24,11 +29,12 @@ class ForumPostsController < ApplicationController
   end
 
   def update
+    @forum_thread = ForumThread.find(params[:forum_thread_id])
     @forum_post = ForumPost.find(params[:id])
 
     if @forum_post.update(forum_post_params)
       flash[:notice] = 'Post has been edited'
-      render 'forum_threads/show', locals: { forum_thread: @forum_thread }
+      redirect_to forum_thread_path(@forum_thread)
     else
       flash[:notice] = 'Failed to edit post'
       render 'partial/new'

@@ -1,0 +1,4 @@
+<%= form_with(model: locals[:forum_post], url: forum_thread_forum_post_path(@forum_thread, locals[:forum_post]), method: :patch) do |form| %>
+  <%= form.text_area :content, value: locals[:forum_post].content %>
+  <%= form.submit "Edit Post" %>
+<% end %>

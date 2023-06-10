@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'faq', to: 'static#faq', as: :faq
   resources :courses
   resources :forum_threads do
-    resources :forum_posts
+    resources :forum_posts, except: [:show]
   end
   resources :enrollments
 end

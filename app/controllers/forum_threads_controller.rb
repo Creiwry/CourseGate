@@ -5,7 +5,7 @@ class ForumThreadsController < ApplicationController
 
   def show
     @forum_thread = ForumThread.find(params[:id])
-    @forum_posts = ForumPost.where(forum_thread_id: params[:id])
+  @forum_posts = @forum_thread.forum_posts
   end
 
   def new
