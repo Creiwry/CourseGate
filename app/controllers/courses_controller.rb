@@ -7,6 +7,11 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+
+    if current_student && current_student.enrollments.exists?(course: @course)
+      @enrollment = Enrollment.find_by(student_id: current_student.id, course_id: @course.id)
+      @enrollment_id = @enrollment.id
+    end
   end
 
   def new
@@ -24,26 +29,40 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    @course = Course.where(id: params[:id])
+    @course = Course.find(params[:id])
   end
 
   def update
-    @course = Course.where(id: params[:id])
-    if @course.update(course_params)
-      flash[:notice] = "Course has been updated"
-      redirect_to course_path(params[:id])
+    @course = Course.find(params[:id])
+    course_id = @course.id
+
+    if current_instructor == @course.instructor
+      if @course.update(course_params)
+        flash[:notice] = "Course has been updated"
+        redirect_to course_path(params[:id])
+      else
+        flash[:notice] = "Failed to update Course"
+        render :edit
+      end
     else
-      flash[:notice] = "Failed to update Course"
-      render :edit
+      flash[:notice] = 'You are not authorized to edit this Course'
+      redirect_to course_path(course_id)
     end
   end
 
   def destroy
     course = Course.find(params[:id])
-    if course.destroy
-      flash[:notice] = "Course has been deleted"
+    course_id = @course.id
+
+    if current_instructor == course.instructor
+      if course.destroy
+        flash[:notice] = "Course has been deleted"
+      else
+        flash[:notice] = "Failed to delete the course"
+      end
     else
-      flash[:notice] = "Failed to delete the course"
+      flash[:notice] = 'You are not authorized to delete this Course'
+      redirect_to course_path(course_id)
     end
     redirect_to courses_path
   end

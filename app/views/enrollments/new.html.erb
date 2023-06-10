@@ -1,7 +1,6 @@
 <div>
   <h1>Are you sure you want to enroll?</h1>
   <%= form_with(model: @enrollment, url: enrollments_path, method: :post) do |form| %>
-    <% require 'pry'; binding.pry %>
     <%= form.hidden_field :course_id, value: params[:course_id] %>
     <%= form.submit "Enroll" %>
   <% end %>

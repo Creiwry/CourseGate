@@ -1,7 +1,6 @@
 <div class="container">
   <%= form_with(model: @forum_thread, url: forum_threads_path, method: :post) do |form| %>
     <%# NOTE: add either instructor or student id to model to limit who can edit threads?  %>
-    <% require 'pry'; binding.pry %>
     <%= form.hidden_field :course_id, value: params[:course_id] %>
     <%= form.text_field :title, value: 'Please enter title'  %>
     <%= form.text_area :description, value: "Plese enter description of thread" %>

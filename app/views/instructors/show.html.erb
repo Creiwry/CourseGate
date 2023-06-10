@@ -12,13 +12,15 @@
         </li>
       <% end %>
     </ul>
+    <%= link_to "Create new course", new_course_path  %>
   </div>
   <div class="container">
+    <h2>Forum Threads</h2>
     <ul>
-      <% @instructor.forum_threads.each do |forum_threads| %> 
+      <% @instructor.forum_threads.each do |forum_thread| %> 
         <div class="card">
           <div class="card-content">
-            <%= link_to forum_post.forum_thread.title, forum_thread_path(forum_thread.id) %>
+            <%= link_to forum_thread.title, forum_thread_path(forum_thread.id) %>
           </div>
         </div> 
       <% end %>

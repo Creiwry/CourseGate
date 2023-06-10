@@ -5,15 +5,17 @@
         <div class="card-body">
           <%= forum_post.content %>
           <br>
-          <div class="<%= "d-none" unless current_student == forum_post.student  %>">
+          <% if current_student == forum_post.student  %>
             <%= link_to "Edit", "#", class: "edit-link", data: { controller: "edit-toggle", action: "click->edit-toggle#toggleEdit" } %>
             <div class="edit-partial d-none" data-target="edit-toggle.editPartial">
               <%= render "forum_posts/edit", locals: { forum_post: forum_post } %>
             </div>
             <br>
+          <% end %>
+          <% if current_student == forum_post.student || current_instructor == forum_post.forum_thread.instructor %>
             <%= button_to "Delete", forum_thread_forum_post_path(forum_thread_id: @forum_thread.id, id: forum_post.id), method: :delete, data: {turbo_confirm: 'Are you sure?'} %>
             <br>
-          </div>
+          <% end %>
           <%= forum_post.student.name %>
         </div>
       </div>

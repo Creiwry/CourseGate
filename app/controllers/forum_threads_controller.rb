@@ -5,7 +5,7 @@ class ForumThreadsController < ApplicationController
 
   def show
     @forum_thread = ForumThread.find(params[:id])
-  @forum_posts = @forum_thread.forum_posts
+    @forum_posts = @forum_thread.forum_posts
   end
 
   def new
@@ -14,12 +14,20 @@ class ForumThreadsController < ApplicationController
 
   def create
     @forum_thread = ForumThread.new(forum_thread_params)
-    if @forum_thread.save!
-      flash[:notice] = 'Forum Thread has been created'
-      redirect_to forum_thread_path(@forum_thread.id)
+    instructor = @forum_thread.course.instructor
+    course_id = @forum_thread.course.id
+
+    if current_instructor == instructor
+      if @forum_thread.save!
+        flash[:notice] = 'Forum Thread has been created'
+        redirect_to forum_thread_path(@forum_thread.id)
+      else
+        flash[:notice] = 'Failed to create Forum Thread'
+        render :new
+      end
     else
-      flash[:notice] = 'Failed to create Forum Thread'
-      render :new
+      flash[:notice] = 'You are not authorized to create this Forum Thread'
+      redirect_to course_path(course_id)
     end
   end
 
@@ -29,23 +37,37 @@ class ForumThreadsController < ApplicationController
 
   def update
     @forum_thread = ForumThread.find(params[:id])
+    course_id = @forum_thread.course.id
 
-    if @forum_thread.update(forum_thread_params)
-      flash[:notice] = 'Forum Thread has been updated successfully'
-      redirect_to forum_thread_path(@forum_thread.id)
+    instructor = @forum_thread.course.instructor
+    if current_instructor == instructor
+      if @forum_thread.update(forum_thread_params)
+        flash[:notice] = 'Forum Thread has been updated successfully'
+        redirect_to forum_thread_path(@forum_thread.id)
+      else
+        flash[:notice] = 'Failed to update Forum Thread'
+        render :edit
+      end
     else
-      flash[:notice] = 'Failed to update Forum Thread'
-      render :edit
+      flash[:notice] = 'You are not authorized to edit this Forum Thread'
+      redirect_to course_path(course_id)
     end
   end
 
   def destroy
     forum_thread = ForumThread.find(params[:id])
+    instructor = @forum_thread.course.instructor
+    course_id = @forum_thread.course.id
 
-    if forum_thread.destroy
-      flash[:notice] = 'Forum Thread has been deleted'
+    if current_instructor == instructor
+      if forum_thread.destroy
+        flash[:notice] = 'Forum Thread has been deleted'
+      else
+        flash[:alert] = 'Failed to delete Forum Thread'
+      end
     else
-      flash[:notice] = 'Failed to delete Forum Thread'
+      flash[:alert] = 'You are not authorized to delete this Forum Thread'
+      redirect_to course_path(course_id)
     end
     redirect_to forum_threads_path
   end
