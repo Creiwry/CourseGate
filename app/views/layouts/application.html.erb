@@ -31,10 +31,13 @@
                   Student Account
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><%= button_to("Sign in", new_student_session_path, class:"btn btn-primary" ) %></li>
+                  <%= button_to("Profile", student_path(current_student.id), method: :get, class: "btn btn-primary") if current_student %>
+                  <li><%= button_to("Sign in", new_student_session_path, class:"btn btn-primary" ) unless current_student %></li>
                   <li><%= button_to("Sign out", destroy_student_session_path, method: :delete, class:"btn btn-danger" ) %></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><%= button_to("Sign up", new_student_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                  <% unless current_student %>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><%= button_to("Sign up", new_student_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                  <% end %>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -42,10 +45,13 @@
                   Instuctor Account
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><%= button_to("Sign in", new_instructor_session_path, class:"btn btn-primary" ) %></li>
+                  <%= button_to("Profile", instructor_path(current_instructor.id), method: :get, class: "btn btn-primary") if current_instructor %>
+                  <li><%= button_to("Sign in", new_instructor_session_path, class:"btn btn-primary" ) unless current_instructor %></li>
                   <li><%= button_to("Sign out", destroy_instructor_session_path, method: :delete, class:"btn btn-danger" ) %></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><%= button_to("Sign up", new_instructor_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                  <% unless current_instructor %>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><%= button_to("Sign up", new_instructor_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                  <% end %>
                 </ul>
               </li>
               <li class="nav-item">

@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>
+    <%= @student.name %>
+  </h1>
+  <div class="container">
+    <h2>Courses</h2>
+    <ul>
+      <% @student.courses.each do |course| %>
+        <li>
+          <%= link_to course.name, course_path(course.id) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="container">
+    <ul>
+      <% @student.forum_posts.each do |forum_post| %> 
+        <div class="card">
+          <div class="card-content">
+            <%= forum_post.content %>
+            <%= link_to forum_post.forum_thread.title, forum_thread_path(forum_post.forum_thread.id) %>
+          </div>
+        </div> 
+      <% end %>
+    </ul>
+  </div>
+
+</div>

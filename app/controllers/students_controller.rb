@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
-  def index
+  def show 
+    @student = Student.find(current_student.id)
   end
 end
