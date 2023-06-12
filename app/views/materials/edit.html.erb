@@ -1,0 +1,8 @@
+<div class="container">
+  <%= form_with(model: @material, url: course_material_path(params[:course_id, @material.id]), method: :patch) do |form| %>
+    <%= form.hidden :course_id, params[:course_id] %>
+    <%= form.text_field :title, value: @material.title %>
+    <%= form.text_area :content, value: @material.content %>
+    <%= form.submit 'Submit' %>
+  <% end %>  
+</div>

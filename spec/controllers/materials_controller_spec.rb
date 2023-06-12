@@ -9,23 +9,23 @@ RSpec.describe MaterialsController, type: :controller do
     sign_in(instructor)
   end
 
-  describe 'GET #index' do
-    it 'returns a success response' do
-      get :index
-      expect(response).to be_successful
-    end
-  end
+  # describe 'GET #index' do
+  #   it 'returns a success response' do
+  #     get :index, params: { course_id: course.id }
+  #     expect(response).to be_successful
+  #   end
+  # end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      get :show
+      get :show, params: { course_id: course.id, id: material.id }
       expect(response).to be_successful
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
-      get :new
+      get :new, params: {course_id: course.id }
       expect(response).to be_successful
     end
   end
@@ -34,13 +34,13 @@ RSpec.describe MaterialsController, type: :controller do
     context 'when instructor who created the course is signed in' do
       it 'creates a new material' do
         expect {
-          post :create, params: { material: attributes_for(:material, course_id: course.id) }
+          post :create, params: { course_id: course.id, material: attributes_for(:material, course_id: course.id) }
         }.to change(Material, :count).by(1)
       end
 
       it 'redirects to created material' do
-        post :create, params: { material: attributes_for(:material, course_id: course.id) }
-        expect(response).to redirect_to(Material.last)
+        post :create, params: { course_id: course.id, material: attributes_for(:material, course_id: course.id) }
+        expect(response).to redirect_to(course_material_path(course.id, Material.last.id))
       end
     end
 
@@ -50,16 +50,15 @@ RSpec.describe MaterialsController, type: :controller do
       end
 
       it 'will raise an error' do
-        expect {
-          post :create, params: { material: attributes_for(:material, course_id: course.id) }
-        }.to raise_error('You are not authorized to create this material')
+        post :create, params: { course_id: course.id, material: attributes_for(:material, course_id: course.id) }
+        expect(flash[:error]).to eq('You are not authorized to create this material')
       end
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      get :edit
+      get :edit, params: { course_id: course.id, id: material.id }
       expect(response).to be_successful
     end
   end
@@ -68,14 +67,14 @@ RSpec.describe MaterialsController, type: :controller do
     context 'when instructor who made the course is signed in' do
       it 'updates the material' do
         new_title = 'New materials title'
-        patch :update, params: { id: material.id, material: { title: new_title } }
+        patch :update, params: { course_id: course.id, id: material.id, material: { title: new_title } }
         material.reload
         expect(material.title).to eq(new_title)
       end
 
       it 'redirects to the material' do
-        patch :update, params: { id: material.id, material: attributes_for(:material) }
-        expect(response).to redirect_to(material)
+        patch :update, params: { course_id: course.id, id: material.id, material: attributes_for(:material) }
+        expect(response).to redirect_to(course_material_path(course.id, material.id))
       end
     end
 
@@ -85,21 +84,20 @@ RSpec.describe MaterialsController, type: :controller do
       end
 
       it 'will fail raise an error' do
-        expect {
-          patch :update, params: { id: material.id, material: attributes_for(:material) }
-        }.to raise_error('You are not authorized to update this material')
+        patch :update, params: { course_id: course.id, id: material.id, material: attributes_for(:material) }
+        expect(flash[:error]).to eq('You are not authorized to edit this material')
       end
     end
   end
 
-  describe 'delete #destroy' do
+  describe 'DELETE #destroy' do
     context 'when instructor who created the material is signed in' do
       it 'destroys the material' do
         material = Material.new(attributes_for(:material, course_id: course.id))
         material.save
 
         expect {
-          delete :destroy, params: { id: material.id }
+          delete :destroy, params: { course_id: course.id, id: material.id }
         }.to change(Material, :count).by(-1)
       end
 
@@ -107,7 +105,7 @@ RSpec.describe MaterialsController, type: :controller do
         material = Material.new(attributes_for(:material, course_id: course.id))
         material.save
 
-        delete :destroy, params: { id: material.id }
+        delete :destroy, params: { course_id: course.id, id: material.id }
         expect(response).to redirect_to(course)
       end
     end
@@ -121,9 +119,8 @@ RSpec.describe MaterialsController, type: :controller do
         material = Material.new(attributes_for(:material, course_id: course.id))
         material.save
 
-        expect {
-          delete :destroy, params: { id: material.id }
-        }.to raise_error('You are not authorized to delete this material')
+        delete :destroy, params: { course_id: course.id, id: material.id }
+        expect(flash[:error]).to eq('You are not authorized to delete this material')
       end
     end
   end

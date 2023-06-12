@@ -11,7 +11,14 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'about_us', to: 'static#about_us', as: :about_us
   get 'faq', to: 'static#faq', as: :faq
-  resources :courses
+
+  resources :courses do
+    resources :materials
+    resources :assignments do
+      resources :submissions
+    end
+  end
+
   resources :forum_threads do
     resources :forum_posts, except: [:show]
   end
