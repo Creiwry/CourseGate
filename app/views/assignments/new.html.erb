@@ -1,0 +1,7 @@
+<div>
+  <%= form_with(model: @assignment, url: course_assignment_path(@assignment.course.id, @assignment.id), method: :post) do |form| %>
+    <%= form.text_field :title, value: 'Please enter the title of the assignment' %>
+    <%= form.text_area :content, value: 'Please enter the content of the assignment' %>
+    <%= form.datetime_field :due_date %>
+    <%= form.submit 'Submit' %>
+</div>

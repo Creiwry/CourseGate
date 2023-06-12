@@ -1,0 +1,11 @@
+<div class="container">
+  <h1><%= @assignment.title %></h1>
+  <div class="assignment-content">
+    <%= @assignment.content %>
+  </div>
+  <div>
+    <%= @assignment.due_date %>
+  </div>
+  <br>
+  <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id) %>
+</div>

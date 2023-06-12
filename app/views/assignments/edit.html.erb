@@ -1,0 +1,7 @@
+<div>
+  <%= form_with(model: @assignment, url: course_assignment_path(@assignment.course.id, @assignment.id), method: :patch) do |form| %>
+    <%= form.text_field :title, value: @assignment.title %>
+    <%= form.text_area :content, value: @assignment.content %>
+    <%= form.datetime_field :due_date, value: @assignment.due_date %>
+    <%= form.submit 'Submit' %>
+</div>
