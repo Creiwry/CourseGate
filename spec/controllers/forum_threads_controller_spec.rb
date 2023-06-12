@@ -48,13 +48,13 @@ RSpec.describe ForumThreadsController, type: :controller do
 
   describe 'PATCH #update' do
     it 'updates the forum thread' do
-      new_name = "New Forum Thread Name"
+      new_name = 'New Forum Thread Name'
       patch :update, params: { id: forum_thread.id, forum_thread: { title: new_name } }
       forum_thread.reload
       expect(forum_thread.title).to eq(new_name)
     end
 
-    it 'redirects to the forum_thread' do
+    it 'redirects to the forum thread' do
       patch :update, params: { id: forum_thread.id, forum_thread: attributes_for(:forum_thread) }
       expect(response).to redirect_to(forum_thread)
     end
