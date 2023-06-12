@@ -4,8 +4,7 @@ RSpec.describe SubmissionsController, type: :controller do
   let(:submission) { create(:submission) }
   let(:enrollment) { submission.enrollment }
   let(:student) { enrollment.student }
-  let(:assignment) { submission.assignment }
-  let(:course) { assignment.course }
+  let(:course) { enrollment.course }
   let(:instructor) { course.instructor }
 
   before do
