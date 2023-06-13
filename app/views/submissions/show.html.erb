@@ -1,0 +1,16 @@
+<div class="container">
+  <h1><%= @submission.assignment.title %></h1>
+  <div>
+    <%= @submission.content %>
+  </div>
+  <div>
+    Score: <%= @submission.score || 'N/A' %>
+  </div>
+  <% if current_instructor && current_instructor == @submission.assignment.course.instructor %>
+  <div>
+    <%= form_with url: score_course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id), method: :patch do |form| %>
+      <%= form.number_field :score, value: 0 %>
+      <%= form.submit "Submit score" %>
+    <% end %>
+  </div>
+</div>

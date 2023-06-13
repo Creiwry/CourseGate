@@ -1,0 +1,7 @@
+<div class="container">
+  <h1><%= @submission.assignment.title %></h1>
+  <%= form_with(model: @submission, url: course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id), method: :patch) do |form| %>
+    <%= form.text_area :content, value: @submission.content %>
+    <%= form.submit "Edit submission" %>
+  <% end %>
+</div>
