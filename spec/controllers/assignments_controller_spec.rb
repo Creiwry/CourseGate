@@ -37,6 +37,12 @@ RSpec.describe AssignmentsController, type: :controller do
           post :create, params: { course_id: course.id, assignment: attributes_for(:assignment) }
         }.to change(Assignment, :count).by(1)
       end
+
+      it 'redirects to assignment' do
+        post :create, params: { course_id: course.id, assignment: attributes_for(:assignment) }
+        new_assignment = Assignment.last
+        expect(response).to redirect_to(course_assignment_path(course.id, new_assignment.id))
+      end
     end
 
     context 'when instructor of course is not signed in' do

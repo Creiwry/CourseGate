@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   resources :courses do
     resources :materials
     resources :assignments do
-      resources :submissions
+      resources :submissions do
+        member do
+          patch :score
+        end
+      end
     end
   end
 
