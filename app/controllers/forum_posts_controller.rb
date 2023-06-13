@@ -1,5 +1,7 @@
 class ForumPostsController < ApplicationController
-  def index 
+  before_action :authenticate_student!, except: [:destroy]
+
+  def index
     @forum_thread = ForumThread.find(params[:forum_thread_id])
   end
 

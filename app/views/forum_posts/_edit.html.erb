@@ -1,4 +1,5 @@
 <%= form_with(model: locals[:forum_post], url: forum_thread_forum_post_path(@forum_thread, locals[:forum_post]), method: :patch) do |form| %>
-  <%= form.text_area :content, value: locals[:forum_post].content %>
-  <%= form.submit "Edit Post" %>
+  <%= form.text_area :content, placeholder: locals[:forum_post].content, class: "form-control w-50" %>
+  <br>
+  <%= form.submit "Edit Post", class: "btn btn-primary" %>
 <% end %>

@@ -1,6 +1,10 @@
-<%= form_with(model: @forum_post, url: forum_thread_forum_posts_path(@forum_thread), local: true) do |form| %>
-<%# TODO: make it work %>
-  <%= form.hidden_field "forum_post[forum_thread_id]", value: params[:forum_thread_id] %>
-  <%= form.text_area "forum_post[content]" %>
-  <%= form.submit "Post" %>
-<% end %>
+<div class="container">
+  <%= form_with(model: @forum_post, url: forum_thread_forum_posts_path(@forum_thread), local: true) do |form| %>
+    <%= form.hidden_field "forum_post[forum_thread_id]", value: params[:forum_thread_id] %>
+    <%= form.label "Write your post:", class: "form-label" %>
+    <br>
+    <%= form.text_area "forum_post[content]", class: "form-control w-50" %>
+    <br>
+    <%= form.submit "Post", class:"btn btn-primary" %>
+  <% end %>
+</div>

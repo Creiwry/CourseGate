@@ -2,10 +2,22 @@
   <h3><%= @forum_thread.title %></h3>
   <div class="card">
     <div class="card-body">
-      <%= @forum_thread.description %>
+      <div class="card-title">
+        <%= @forum_thread.description %>
+        <br>
+        Instructor: <%= @forum_thread.instructor.name %> 
+        <br>
+        On: <%= @forum_thread.created_at.strftime("%H:%M %d/%m/%Y") %>
+        <br>
+        <% if current_instructor == @forum_thread.course.instructor %>
+          <%= link_to "Edit", edit_forum_thread_path(@forum_thread.id), class: "btn btn-warning" %>
+          <%= button_to "Delete", forum_thread_path(@forum_thread.id), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this thread?" }, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+      <div class="card-text">
+        <%= render partial:"forum_posts/new", locals: {forum_thread_id: @forum_thread.id} %> 
+      </div>
     </div>
-    <%= render partial:"forum_posts/new", locals: {forum_thread_id: @forum_thread.id} %> 
-    
   </div>
   <%= render partial: "forum_posts/forum_posts" %>
   

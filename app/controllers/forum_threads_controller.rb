@@ -1,4 +1,6 @@
 class ForumThreadsController < ApplicationController
+  before_action :authenticate_instructor!, except: [:index, :show]
+
   def index
     @forum_threads = ForumThread.all
   end
@@ -56,20 +58,22 @@ class ForumThreadsController < ApplicationController
 
   def destroy
     forum_thread = ForumThread.find(params[:id])
-    instructor = @forum_thread.course.instructor
-    course_id = @forum_thread.course.id
+    instructor = forum_thread.course.instructor
+    course_id = forum_thread.course.id
 
     if current_instructor == instructor
       if forum_thread.destroy
         flash[:notice] = 'Forum Thread has been deleted'
       else
         flash[:alert] = 'Failed to delete Forum Thread'
+        redirect_to forum_thread_path(forum_thread.id)
+        return
       end
+      redirect_to forum_threads_path
     else
       flash[:alert] = 'You are not authorized to delete this Forum Thread'
-      redirect_to course_path(course_id)
+      redirect_to forum_thread_path(forum_thread.id)
     end
-    redirect_to forum_threads_path
   end
 
   private

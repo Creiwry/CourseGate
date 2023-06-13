@@ -1,9 +1,13 @@
 <div class="container">
+  <h1>Create New Thread</h1>
   <%= form_with(model: @forum_thread, url: forum_threads_path, method: :post) do |form| %>
-    <%# NOTE: add either instructor or student id to model to limit who can edit threads?  %>
     <%= form.hidden_field :course_id, value: params[:course_id] %>
-    <%= form.text_field :title, value: 'Please enter title'  %>
-    <%= form.text_area :description, value: "Plese enter description of thread" %>
-    <%= form.submit 'Post Thread' %>
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, placeholder: 'Please enter title', class: "form-control"  %>
+    <br>
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, placeholder: "Please enter description of thread", class: "form-control" %>
+    <br>
+    <%= form.submit 'Post Thread', class: "btn btn-primary" %>
   <% end %>
 </div>

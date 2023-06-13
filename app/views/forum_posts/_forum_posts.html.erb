@@ -5,19 +5,21 @@
         <div class="card-body">
           <%= forum_post.content %>
           <br>
+          By: <%= forum_post.student.name %>
+          <br>
           <% if current_student == forum_post.student  %>
-            <%= link_to "Edit", "#", class: "edit-link", data: { controller: "edit-toggle", action: "click->edit-toggle#toggleEdit" } %>
+            <%= link_to "Edit", "#", class: "edit-link btn btn-primary", data: { controller: "edit-toggle", action: "click->edit-toggle#toggleEdit" } %>
             <div class="edit-partial d-none" data-target="edit-toggle.editPartial">
               <%= render "forum_posts/edit", locals: { forum_post: forum_post } %>
             </div>
             <br>
           <% end %>
           <% if current_student == forum_post.student || current_instructor == forum_post.forum_thread.instructor %>
-            <%= button_to "Delete", forum_thread_forum_post_path(forum_thread_id: @forum_thread.id, id: forum_post.id), method: :delete, data: {turbo_confirm: 'Are you sure?'} %>
+            <%= button_to "Delete", forum_thread_forum_post_path(forum_thread_id: @forum_thread.id, id: forum_post.id), method: :delete, data: {turbo_confirm: 'Are you sure?'}, class: "btn btn-danger" %>
             <br>
           <% end %>
-          <%= forum_post.student.name %>
         </div>
+        on: <%= forum_post.created_at.strftime("%d/%m/%Y at: %H:%M") %>
       </div>
     </div>
   <% end %>
