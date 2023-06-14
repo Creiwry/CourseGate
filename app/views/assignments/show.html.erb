@@ -3,9 +3,16 @@
   <div class="assignment-content">
     <%= @assignment.content %>
   </div>
+  <br>
   <div>
-    <%= @assignment.due_date %>
+    Due Date: 
+    <%= @assignment.due_date.strftime("%H:%M %d/%m/%Y") %>
   </div>
   <br>
-  <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id) %>
+  <% if current_instructor && current_instructor == @assignment.course.instructor %>
+    <%= link_to "Edit assignment", edit_course_assignment_path(params[:course_id], @assignment.id), class: "btn btn-warning" %>
+  <% end %>
+  <% if current_student && current_student.enrollments.exists?(@assignment.course) %>
+    <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id), class: "btn btn-primary" %>
+  <% end %>
 </div>

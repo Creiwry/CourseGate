@@ -1,7 +1,15 @@
 <div>
+  <h1>Edit assignment</h1>
   <%= form_with(model: @assignment, url: course_assignment_path(@assignment.course.id, @assignment.id), method: :patch) do |form| %>
-    <%= form.text_field :title, value: @assignment.title %>
-    <%= form.text_area :content, value: @assignment.content %>
-    <%= form.datetime_field :due_date, value: @assignment.due_date %>
-    <%= form.submit 'Submit' %>
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, placeholder: @assignment.title, class: "form-control" %>
+    <br>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, placeholder: @assignment.content, class: "form-control" %>
+    <br>
+    <%= form.label :due_date, class: "form-label" %>
+    <%= form.datetime_field :due_date, placeholder: @assignment.due_date, class: "form-control" %>
+    <br>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
+  <% end %>
 </div>

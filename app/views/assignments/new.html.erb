@@ -1,7 +1,15 @@
 <div>
-  <%= form_with(model: @assignment, url: course_assignment_path(@assignment.course.id, @assignment.id), method: :post) do |form| %>
-    <%= form.text_field :title, value: 'Please enter the title of the assignment' %>
-    <%= form.text_area :content, value: 'Please enter the content of the assignment' %>
+  <h1>Create new assignment:</h1>
+  <%= form_with(model: @assignment, url: course_assignments_path(params[:course_id]), method: :post) do |form| %>
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, placeholder: 'Please enter the title of the assignment', class: "form-control" %>
+    <br>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, placeholder: 'Please enter the content of the assignment', class: "form-control" %>
+    <br>
+    <%= form.label :due_date, class: "form-label" %>
     <%= form.datetime_field :due_date %>
-    <%= form.submit 'Submit' %>
+    <br>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
+  <% end %>
 </div>

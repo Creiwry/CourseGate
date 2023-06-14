@@ -36,9 +36,6 @@
   </div>
   <br>
   <% if (current_student && current_student.enrollments.exists?(course: @course)) || (current_instructor && current_instructor == @course.instructor) %>
-    <div id="course-assignments" class="d-flex flex-row justify-content-center">
-      <%= link_to "Go to course assignments", course_assignments_path(@course.id), class:"btn btn-primary" %>
-    </div>
     <div id="course-materials">
       <h3>
         Course Materials:
@@ -51,6 +48,20 @@
       <% if (current_instructor && current_instructor == @course.instructor) %>
         <%= link_to "Add new material", new_course_material_path(@course.id), class: "btn btn-primary" %>
       <% end %>
+    </div>
+    <br>
+    <div id="course-assignments" >
+      <h3>
+        Course Assignments:
+      </h3>
+      <ul>
+        <% @course.assignments.each do |assignment| %>
+          <li>
+            <%= link_to assignment.title, course_assignment_path(@course.id, assignment.id) %>
+          </li>
+        <% end %>
+      </ul>
+      <%= link_to "Add new assignment", new_course_assignment_path(@course.id), class:"btn btn-primary" %>
     </div>
   <% end %>
   <br>

@@ -1,7 +1,5 @@
 class AssignmentsController < ApplicationController
-  # def index
-  #   @assignments
-  # end
+  before_action :authenticate_instructor!, except: [:show]
 
   def show
     @assignment = Assignment.find(params[:id])
