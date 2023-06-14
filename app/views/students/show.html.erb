@@ -13,16 +13,18 @@
     </ul>
   </div>
   <div class="container">
+    <h2>Forum Posts</h2>
     <ul>
       <% @student.forum_posts.each do |forum_post| %> 
         <div class="card">
           <div class="card-content">
             <%= forum_post.content %>
+            <br>
             <%= link_to forum_post.forum_thread.title, forum_thread_path(forum_post.forum_thread.id) %>
           </div>
+          <br>
         </div> 
       <% end %>
     </ul>
   </div>
-
 </div>
