@@ -12,10 +12,24 @@
   <% if current_instructor && current_instructor == @assignment.course.instructor %>
     <%= link_to "Edit assignment", edit_course_assignment_path(params[:course_id], @assignment.id), class: "btn btn-warning" %>
   <% end %>
-  <% if current_student && current_student.enrollments.exists?(course: @assignment.course) %>
-    <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id), class: "btn btn-primary" %>
-  <% elsif current_student && current_student.submissions.exists?(assignment: @assignment) %>
+  <br>
+  <% if current_student && @submission_id %>
     <%= link_to "My submission", course_assignment_submission_path(params[:course_id], @assignment.id, @submission_id), class: "btn btn-primary" %>
-
+  <% elsif current_student && current_student.enrollments.exists?(course: @assignment.course) %>
+    <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id), class: "btn btn-primary" %>
+  <% elsif current_instructor && current_instructor == @assignment.course.instructor %>
+    <br>
+    <div id="submissions">
+      <h4>Submissions:</h4>
+      <ul>
+        <% @assignment.submissions.each do |submission| %>
+          <li>
+            <%= link_to submission.enrollment.student.name, course_assignment_submission_path(params[:course_id], params[:id], submission.id) %>
+            -- Score: <%= submission.score || "NA" %>
+          </li>
+        <% end %>
+        
+      </ul>
+    </div>
   <% end %>
 </div>

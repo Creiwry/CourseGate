@@ -6,8 +6,8 @@ class AssignmentsController < ApplicationController
     return unless current_student
 
     enrollment = Enrollment.find_by(course_id: params[:course_id], student_id: current_student.id)
-    if enrollment.submissions.exists?(assignment: @assignment)
-      @submission_id = Submission.find_by(student_id: current_student.id, assignment_id: @assignment.id)
+    if enrollment.submissions.exists?(assignment_id: @assignment.id)
+      @submission_id = Submission.find_by(enrollment_id: enrollment.id, assignment_id: @assignment.id)
     end
   end
 

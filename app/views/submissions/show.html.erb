@@ -1,16 +1,38 @@
 <div class="container">
   <h1><%= @submission.assignment.title %></h1>
   <div>
+    <% if current_student %>
+      <h3>
+        My submission:
+      </h3>
+    <% else current_instructor %>
+      <h3>
+        <%= @submission.enrollment.student.name %>
+      </h3>  
+    <% end %>
     <%= @submission.content %>
   </div>
   <div>
     Score: <%= @submission.score || 'N/A' %>
   </div>
+  <br>
+  <% if current_student %>
+    <div>
+      <%= link_to "Edit", edit_course_assignment_submission_path(params[:course_id], params[:assignment_id], params[:id]), class: "btn btn-warning" %>
+    </div>
+    <br>
+  <% end %>
   <% if current_instructor && current_instructor == @submission.assignment.course.instructor %>
   <div>
-    <%= form_with url: score_course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id), method: :patch do |form| %>
-      <%= form.number_field :score, value: 0 %>
-      <%= form.submit "Submit score" %>
+    <%= form_for @submission, url: score_course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id) do |form| %>
+      <%= form.label :score, class: "form-label" %>
+      <%= form.number_field :score, placeholder: 0, class: "form-control" %>
+      <%= form.submit "Submit score", class: "btn btn-primary" %>
     <% end %>
+  </div>
+  <br>
+  <% end %>
+  <div>
+    <%= link_to "Course", course_path(params[:course_id]), class: "btn btn-primary" %>
   </div>
 </div>

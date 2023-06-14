@@ -1,7 +1,10 @@
 <div class="container">
   <h1><%= @assignment.title %></h1>
-  <%= form_with(model: @submission, url: course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id), method: :post) do |form| %>
-    <%= form.text_area :content, value: "Please enter your submission here" %>
-    <%= form.submit "Submit" %>
+  <br>
+  <%= form_with(model: @submission, url: course_assignment_submissions_path(params[:course_id], params[:assignment_id]), method: :post) do |form| %>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, placeholder: "Please enter your submission here", class: "form-control" %>
+    <br>
+    <%= form.submit "Submit", class:"btn btn-primary" %>
   <% end %>
 </div>
