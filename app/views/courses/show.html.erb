@@ -1,34 +1,63 @@
 <div class="container">
-  <div class="title">
-    <h3><%= @course.name %></h3>
-  </div>
-  <% if current_instructor == @course.instructor %>
+  <div id="course-info">
+    <div class="title">
+      <h3 class="text-center"><%= @course.name %></h3>
+    </div>
+    <% if current_instructor == @course.instructor %>
+      <div class="d-flex flex-row justify-content-center">
+        <div class="p-2">
+          <%= button_to "Edit Course", edit_course_path(@course.id), method: :get, class: "btn btn-warning" %>
+        </div>
+        <div class="p-2">
+        <%= button_to "Delete Course", course_path(@course.id), method: :delete, data: {turbo_confirm: "Are you sure you want to delete this course?"}, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+    <br>
+
+    <div class="text-center" >
+      <h5>Instructor: <%= @course.instructor.name %></h5>
+      <p><%= @course.description %></p>
+    </div>
     <div>
-      <%= button_to "Edit Course", edit_course_path(@course.id), method: :get %>
-      <%= button_to "Delete Course", course_path(@course.id), method: :delete, data: {turbo_confirm: "Are you sure you want to delete this course?"} %>
+    </div>
+    <div class="d-flex flex-row justify-content-center">
+      <% if current_student && current_student.enrollments.exists?(course: @course) %>
+        <div>
+          <%= button_to "Unenroll", enrollment_path(@enrollment_id), method: :delete, data: {turbo_confirm: "Are you sure you want to unenroll from this course?"}, class: "btn btn-danger" %>
+        </div>
+      <% elsif !current_student %>
+      <% else %>
+        <div>
+          <%= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <% if (current_student && current_student.enrollments.exists?(course: @course)) || (current_instructor && current_instructor == @course.instructor) %>
+    <div id="course-assignments" class="d-flex flex-row justify-content-center">
+      <%= link_to "Go to course assignments", course_assignments_path(@course.id), class:"btn btn-primary" %>
+    </div>
+    <div id="course-materials">
+      <h3>
+        Course Materials:
+      </h3>
+      <ul>
+        <% @materials.each do |material| %>
+          <li><%= link_to material.title, course_material_path(@course.id, material.id) %></li>
+        <% end %>
+      </ul>
+      <% if (current_instructor && current_instructor == @course.instructor) %>
+        <%= link_to "Add new material", new_course_material_path(@course.id), class: "btn btn-primary" %>
+      <% end %>
     </div>
   <% end %>
-
-  <div>
-    <h5>Instructor: <%= @course.instructor.name %></h5>
-  </div>
-  <div>
-    <p><%= @course.description %></p>
-  </div>
-  <% if current_student && current_student.enrollments.exists?(course: @course) %>
-    <p>You are already enrolled in this course</p>
-    <%= button_to "Unenroll", enrollment_path(@enrollment_id), method: :delete, data: {turbo_confirm: "Are you sure you want to unenroll from this course?"} %>
-  <% elsif !current_student %>
-  <% else %>
-    <div>
-      <%= link_to "Enroll", new_enrollment_path(course_id: @course.id) %>
-    </div>
-  <% end %>
-
-  <div>
-    <h5>
-      Forum Threads
-    </h5>
+  <br>
+  <div id="forum-threads">
+    <h3>
+      Forum Threads:
+    </h3>
     <div>
       <ul>
         <% @course.forum_threads.each do |forum_thread| %>
@@ -39,7 +68,7 @@
       </ul>
       <% if current_instructor == @course.instructor %>
         <div>
-          <%= link_to "Create a Forum Thread", new_forum_thread_path(course_id: @course.id) %>
+          <%= link_to "Create a Forum Thread", new_forum_thread_path(course_id: @course.id), class: "btn btn-primary" %>
         </div>
       <% end %> 
     </div>

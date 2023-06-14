@@ -1,7 +1,9 @@
 <div class="container">
   <%= form_with(model: @course, url: course_path(@course.id), method: :patch) do |form| %>
-    <%= form.text_field :name, value: @course.name %>
-    <%= form.text_area :description, value: @course.description %>
-    <%= form.submit "Edit Course" %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, placeholder: @course.name, class: "form-control" %>
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, placeholder: @course.description, class: "form-control" %>
+    <%= form.submit "Edit Course", class: "btn btn-primary"  %>
   <% end %>
 </div>

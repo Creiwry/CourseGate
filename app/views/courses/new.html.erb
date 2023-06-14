@@ -1,7 +1,12 @@
 <div class="container">
+  <h1>New Course</h1>
   <%= form_with(model: @course, url: courses_path, method: :post) do |form| %>
-    <%= form.text_field :name, value: "Enter name" %>
-    <%= form.text_area :description, value: "Enter description" %>
-    <%= form.submit "Create Course" %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, placeholder: "Enter name", class: "form-control" %>
+    <br>
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, placeholder: "Enter description", class: "form-control" %>
+    <br>
+    <%= form.submit "Create Course", class: "btn btn-primary" %>
   <% end %>
 </div>

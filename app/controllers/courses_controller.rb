@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @materials = Material.where(course_id: @course.id)
 
     if current_student && current_student.enrollments.exists?(course: @course)
       @enrollment = Enrollment.find_by(student_id: current_student.id, course_id: @course.id)
