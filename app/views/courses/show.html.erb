@@ -29,7 +29,7 @@
       <% elsif !current_student %>
       <% else %>
         <div>
-          <%= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: "btn btn-primary" %>
+          <%= button_to "Enroll", enrollments_path(enrollment: {course_id: @course.id}), method: :post, data: {turbo_confirm: "Are you sure you want to enroll"}, class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>

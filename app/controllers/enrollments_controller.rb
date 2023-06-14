@@ -1,36 +1,26 @@
 class EnrollmentsController < ApplicationController
   before_action :authenticate_student!
 
-  def index
-    user = current_student
-    @enrollments = Enrollment.where(student_id: user.id)
-  end
-
-  def show
-  end
-
-  def new
-    @enrollment = Enrollment.new
-    @course = Course.find(params[:course_id])
-  end
-
   def create
     @enrollment = Enrollment.new(enrollment_params.merge(student_id: current_student.id))
     if @enrollment.save!
+      flash[:notice] = "Enrollment successful"
       redirect_to course_path(@enrollment.course)
     else
+      flash[:error] = "Failed to enroll"
       render :new
     end
   end
 
   def destroy
     enrollment = Enrollment.find(params[:id])
+    course_id = enrollment.course.id
     if enrollment.destroy
-      flash[:notice] = "Enrollment has been deleted successfully."
+      flash[:notice] = "Unenrollment successful"
     else
-      flash[:error] = "Failed to delete the enrollment."
+      flash[:error] = "Failed to unenroll"
     end
-    redirect_to enrollments_path
+    redirect_to course_path(course_id)
   end
 
   private

@@ -1,9 +1,0 @@
-<div class="container">
-  <ul>
-    <% @enrollments.each do |enrollment| %>
-      <li>
-        <%= link_to enrollment.course.name, course_path(id: enrollment.course_id) %>
-      </li>
-    <% end %>
-  </ul>
-</div>
