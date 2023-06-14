@@ -1,8 +1,10 @@
 <div class="container">
-  <%= form_with(model: @material, url: course_material_path(params[:course_id, @material.id]), method: :patch) do |form| %>
-    <%= form.hidden :course_id, params[:course_id] %>
-    <%= form.text_field :title, value: @material.title %>
-    <%= form.text_area :content, value: @material.content %>
-    <%= form.submit 'Submit' %>
+  <%= form_with(model: @material, url: course_material_path(params[:course_id], @material.id), method: :patch) do |form| %>
+    <%= form.hidden_field :course_id, value: params[:course_id] %>
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, placeholder: @material.title, class: "form-control" %>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, placeholder: @material.content, class: "form-control" %>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
   <% end %>  
 </div>

@@ -1,7 +1,17 @@
 <div class="container">
-  <h1><%= @material.course.name %></h1>
+  <h1>Course: <%= @material.course.name %></h1>
   <h2><%= @material.title %></h2>
+  <br>
   <div class="material-content">
-    <%= @material.content %>
+    <p>
+      <%= @material.content %>
+    </p>
   </div>
+  <br>
+  <% if current_instructor && current_instructor == @material.course.instructor %>
+    <%= link_to "Edit Material", edit_course_material_path(params[:course_id], @material.id), class: "btn btn-primary" %>
+    <br>
+  <% end %>
+  <br>
+  <%= link_to "Go back to course", course_path(params[:course_id]), class:"btn btn-primary" %>
 </div>

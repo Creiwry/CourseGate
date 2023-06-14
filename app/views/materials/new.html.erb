@@ -1,8 +1,13 @@
 <div class="container">
-  <%= form_with(model: @material, url: course_material_path(params[:course_id, @material.id]), method: :post) do |form| %>
-    <%= form.hidden :course_id, params[:course_id] %>
-    <%= form.text_field :title, value: 'Please enter title of material' %>
-    <%= form.text_area :content, value: 'Please enter content of material' %>
-    <%= form.submit 'Submit' %>
+  <h1>New Course Material</h1>
+  <%= form_with(model: @material, url: course_materials_path(params[:course_id]), method: :post) do |form| %>
+    <%= form.hidden_field :course_id, value: params[:course_id] %>
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, placeholder: 'Please enter title of material', class: "form-control" %>
+    <br>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, placeholder: 'Please enter content of material', class: "form-control" %>
+    <br>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
   <% end %>  
 </div>
