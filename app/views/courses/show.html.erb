@@ -61,7 +61,9 @@
           </li>
         <% end %>
       </ul>
-      <%= link_to "Add new assignment", new_course_assignment_path(@course.id), class:"btn btn-primary" %>
+      <% if (current_instructor && current_instructor == @course.instructor) %>
+        <%= link_to "Add new assignment", new_course_assignment_path(@course.id), class:"btn btn-primary" %>
+      <% end %>
     </div>
   <% end %>
   <br>
