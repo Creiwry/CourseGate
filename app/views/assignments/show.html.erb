@@ -14,5 +14,8 @@
   <% end %>
   <% if current_student && current_student.enrollments.exists?(course: @assignment.course) %>
     <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id), class: "btn btn-primary" %>
+  <% elsif current_student && current_student.submissions.exists?(assignment: @assignment) %>
+    <%= link_to "My submission", course_assignment_submission_path(params[:course_id], @assignment.id, @submission_id), class: "btn btn-primary" %>
+
   <% end %>
 </div>
