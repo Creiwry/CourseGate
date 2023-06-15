@@ -19,6 +19,7 @@
   <% if current_student %>
     <div>
       <%= link_to "Edit", edit_course_assignment_submission_path(params[:course_id], params[:assignment_id], params[:id]), class: "btn btn-warning" %>
+      <%= button_to "Delete", course_assignment_submission_path(params[:course_id], params[:assignment_id], params[:id]), method: :delete, class: "btn btn-danger", data: { turbo_confirm: "Are you sure you want to delete this submission?" } %>
     </div>
     <br>
   <% end %>

@@ -1,10 +1,32 @@
-<div class="container">
-  <h1><%= @assignment.title %></h1>
-  <br>
-  <%= form_with(model: @submission, url: course_assignment_submissions_path(params[:course_id], params[:assignment_id]), method: :post) do |form| %>
-    <%= form.label :content, class: "form-label" %>
-    <%= form.text_area :content, placeholder: "Please enter your submission here", class: "form-control" %>
-    <br>
-    <%= form.submit "Submit", class:"btn btn-primary" %>
-  <% end %>
-</div>
+<section id="content">
+  <div class="content-wrap">
+    
+    <div class="container mw-md">
+      <h3 class="mt-5 mb-3 text-center"><%= @assignment.title %></h3>
+      <div class="card bg-secondary bg-opacity-10 border-0">
+        <div class="card-body p-4">
+
+          <div class="form-widget">
+            <div class="row">
+              
+              <%= form_with(model: @submission, url: course_assignment_submissions_path(params[:course_id], params[:assignment_id]), method: :post) do |form| %>
+                <div class="col-12 form-group">
+                  <%= form.label :content, class: "form-label" %>
+                  <%= form.text_area :content, placeholder: "Please enter your submission here", rows: 10, required: true, class: "form-control" %>
+                </div>
+
+                <div class="col-12">
+                  <%= form.submit "Submit", class:"button rounded w-100 bg-contrast-900 h-bg-dark m-0" %>
+                </div>
+              <% end %>
+            </div>
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

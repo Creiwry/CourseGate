@@ -1,6 +1,75 @@
 @import "bootstrap";
 
+// imports from stylesheets folder
+@import "template-sass/_variables";
+@import "template-sass/_mixins";
+@import "template-sass/_blog";
+@import "template-sass/_content";
+@import "template-sass/_dark";
+@import "template-sass/_events";
+@import "template-sass/_extras";
+@import "template-sass/_footer";
+@import "template-sass/_forms";
+@import "template-sass/_header";
+@import "template-sass/_layouts";
+@import "template-sass/_page-loaders";
+@import "template-sass/_pagetitle";
+@import "template-sass/_paginations";
+@import "template-sass/_patterns";
+@import "template-sass/_portfolio";
+@import "template-sass/_root";
+@import "template-sass/_shop";
+@import "template-sass/_shortcodes";
+@import "template-sass/_sliders";
+@import "template-sass/_style-rtl";
+@import "template-sass/_topbar";
+@import "template-sass/_typography";
+@import "template-sass/_utilities";
+@import "template-sass/_widgets";
+@import "template-sass/animate";
+@import "template-sass/magnific-popup";
+
+// // imports from components folder
+// // @import "components/bs-datatable";
+// // @import "components/bs-filestyle";
+// // @import "components/bs-rating";
+// // @import "components/bs-select";
+// // @import "components/bs-switches-vars";
+// // @import "components/bs-switches";
+// // @import "components/dark-components";
 
 .column-count-2 {
   column-count: 2;
+}
+
+html,body {
+  min-height: 100%;
+}
+
+//footer styling
+.block-footer-1 .widget_nav_menu li a,
+.block-footer-1 .widget_links li a,
+.block-footer-1 .widget_meta li a,
+.block-footer-1 .widget_archive li a,
+.block-footer-1 .widget_recent_comments li a,
+.block-footer-1 .widget_recent_entries li a,
+.block-footer-1 .widget_categories li a,
+.block-footer-1 .widget_pages li a,
+.block-footer-1 .widget_rss li a{
+    font-size: 0.875rem;
+    padding-left: 6px;
+}
+
+.block-footer-1 .widget_nav_menu:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_links:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_meta:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_archive:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_recent_entries:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_categories:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_pages:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_rss:not(.widget-li-noicon) li::before,
+.block-footer-1 .widget_recent_comments:not(.widget-li-noicon) li::before {
+  content: "\ea1d";
+    font-family: 'lined-icons';
+    color: #1ABC9B;
 }

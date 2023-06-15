@@ -1,10 +1,31 @@
-<div class="container">
-  <h1><%= @submission.assignment.title %></h1>
-  <h3>Edit my submission</h3>
-  <%= form_with(model: @submission, url: course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id), method: :patch) do |form| %>
-    <%= form.label :content, class: "form-label" %>
-    <%= form.text_area :content, placeholder: @submission.content, class: "form-control" %>
-    <br>
-    <%= form.submit "Edit submission", class: "btn btn-primary" %>
-  <% end %>
-</div>
+<section id="content">
+  <div class="content-wrap">
+    
+    <div class="container mw-md">
+      <h3 class="mt-5 mb-3 text-center"><%= @submission.assignment.title %></h3>
+      <div class="card bg-secondary bg-opacity-10 border-0">
+        <div class="card-body p-4">
+
+          <div class="form-widget">
+            <div class="row">
+              <%= form_with(model: @submission, url: course_assignment_submission_path(params[:course_id], params[:assignment_id], @submission.id), method: :patch) do |form| %>
+                <div class="col-12 form-group">
+                  <%= form.label :content, class: "form-label" %>
+                  <%= form.text_area :content, placeholder: @submission.content, rows: 10, required: true, class: "form-control" %>
+                </div>
+
+                <div class="col-12">
+                  <%= form.submit "Edit submission", class: "button rounded w-100 bg-contrast-900 h-bg-dark m-0" %>
+                </div>
+              <% end %>
+            </div>
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

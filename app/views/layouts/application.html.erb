@@ -2,89 +2,95 @@
 <html>
   <head>
     <title>CourseGate</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
-  <body>
-    <div class="container-fluid mb-8">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">CourseGate</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Courses", courses_path, class:"nav-link" %>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Student Account
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <%= button_to("Profile", student_path(current_student.id), method: :get, class: "btn btn-primary") if current_student %>
-                  <li><%= button_to("Sign in", new_student_session_path, class:"btn btn-primary" ) unless current_student %></li>
-                  <li><%= button_to("Sign out", destroy_student_session_path, method: :delete, class:"btn btn-danger" ) %></li>
-                  <% unless current_student %>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><%= button_to("Sign up", new_student_registration_path, method: :get, class: "btn btn-success" ) %></li>
-                  <% end %>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Instuctor Account
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <%= button_to("Profile", instructor_path(current_instructor.id), method: :get, class: "btn btn-primary") if current_instructor %>
-                  <li><%= button_to("Sign in", new_instructor_session_path, class:"btn btn-primary" ) unless current_instructor %></li>
-                  <li><%= button_to("Sign out", destroy_instructor_session_path, method: :delete, class:"btn btn-danger" ) %></li>
-                  <% unless current_instructor %>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><%= button_to("Sign up", new_instructor_registration_path, method: :get, class: "btn btn-success" ) %></li>
-                  <% end %>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <%= link_to "About Us", :about_us, class:"nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "FAQ", :faq, class:"nav-link" %>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+  <body class="stretched">
+    
+    <div id="wrapper">
+      
+      <div class="container-fluid mb-8">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div>
+            <a class="navbar-brand" href="#">CourseGate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Courses", courses_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Student Account
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= button_to("Profile", student_path(current_student.id), method: :get, class: "btn btn-primary") if current_student %>
+                    <li><%= button_to("Sign in", new_student_session_path, class:"btn btn-primary" ) unless current_student %></li>
+                    <li><%= button_to("Sign out", destroy_student_session_path, method: :delete, class:"btn btn-danger" ) %></li>
+                    <% unless current_student %>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= button_to("Sign up", new_student_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                    <% end %>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Instuctor Account
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= button_to("Profile", instructor_path(current_instructor.id), method: :get, class: "btn btn-primary") if current_instructor %>
+                    <li><%= button_to("Sign in", new_instructor_session_path, class:"btn btn-primary" ) unless current_instructor %></li>
+                    <li><%= button_to("Sign out", destroy_instructor_session_path, method: :delete, class:"btn btn-danger" ) %></li>
+                    <% unless current_instructor %>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= button_to("Sign up", new_instructor_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                    <% end %>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "About Us", :about_us, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "FAQ", :faq, class:"nav-link" %>
+                </li>
+              </ul>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
           </div>
-        </div>
-      </nav>
-    </div>
-    <div>
-      <% flash.each do |name, type| %>
-        <% puts "name:  #{name}, type:  #{type}" %>
-        <% if name == "notice" %>
-          <%= content_tag :div, type, :class => "notice alert-primary flash_name#{name}", :role => "notice" %>
-        <% elsif name == "alert" || name == "error" %>
-          <%= content_tag :div, type, :class => "alert alert-danger flash_name#{name}", :role => "alert" %>
-        <% else %>
-          <%= content_tag :div, type, :class => "alert alert-warning flash_name#{name}", :role => "warning" %>
+        </nav>
+      </div>
+      <div>
+        <% flash.each do |name, type| %>
+          <% puts "name:  #{name}, type:  #{type}" %>
+          <% if name == "notice" %>
+            <%= content_tag :div, type, :class => "notice alert-primary flash_name#{name}", :role => "notice" %>
+          <% elsif name == "alert" || name == "error" %>
+            <%= content_tag :div, type, :class => "alert alert-danger flash_name#{name}", :role => "alert" %>
+          <% else %>
+            <%= content_tag :div, type, :class => "alert alert-warning flash_name#{name}", :role => "warning" %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <br>
+      <div style="height: 1000px">
+        <%= yield %>
+      </div>
+      <footer>
+        <%= render "layouts/footer" %>
+      </footer>
     </div>
-    <br>
-    <%= yield %>
-    <footer>
-      Footer
-    </footer>
   </body>
 </html>
