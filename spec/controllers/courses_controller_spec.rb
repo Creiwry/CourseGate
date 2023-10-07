@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe CoursesController, type: :controller do
-  let(:instructor) { create(:instructor) }
   let(:course) { create(:course) }
+  let(:instructor) { course.instructor }
 
-  before do
+  before(:each) do
     sign_in(instructor)
   end
 
@@ -31,9 +31,9 @@ RSpec.describe CoursesController, type: :controller do
 
   describe 'POST #create' do
     it 'creates a new course' do
-      expect {
+      expect do
         post :create, params: { course: attributes_for(:course) }
-      }.to change(Course, :count).by(1)
+      end.to change(Course, :count).by(1)
     end
 
     it 'redirects to the created course' do
@@ -66,9 +66,9 @@ RSpec.describe CoursesController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the course' do
       course
-      expect {
+      expect do
         delete :destroy, params: { id: course.id }
-      }.to change(Course, :count).by(-1)
+      end.to change(Course, :count).by(-1)
     end
 
     it 'redirects to the courses list' do

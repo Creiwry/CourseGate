@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_instructor!, except: [:index, :show]
+  before_action :authenticate_instructor!, except: %i[index show]
 
   def index
     @courses = Course.all
@@ -9,10 +9,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @materials = Material.where(course_id: @course.id)
 
-    if current_student && current_student.enrollments.exists?(course: @course)
-      @enrollment = Enrollment.find_by(student_id: current_student.id, course_id: @course.id)
-      @enrollment_id = @enrollment.id
-    end
+    return unless current_student && current_student.enrollments.exists?(course: @course)
+
+    @enrollment = Enrollment.find_by(student_id: current_student.id, course_id: @course.id)
+    @enrollment_id = @enrollment.id
   end
 
   def new
@@ -39,10 +39,10 @@ class CoursesController < ApplicationController
 
     if current_instructor == @course.instructor
       if @course.update(course_params)
-        flash[:notice] = "Course has been updated"
+        flash[:notice] = 'Course has been updated'
         redirect_to course_path(params[:id])
       else
-        flash[:notice] = "Failed to update Course"
+        flash[:notice] = 'Failed to update Course'
         render :edit
       end
     else
@@ -53,14 +53,14 @@ class CoursesController < ApplicationController
 
   def destroy
     course = Course.find(params[:id])
-    course_id = @course.id
+    course_id = course.id
 
     if current_instructor == course.instructor
-      if course.destroy
-        flash[:notice] = "Course has been deleted"
-      else
-        flash[:notice] = "Failed to delete the course"
-      end
+      flash[:notice] = if course.destroy
+                         'Course has been deleted'
+                       else
+                         'Failed to delete the course'
+                       end
     else
       flash[:notice] = 'You are not authorized to delete this Course'
       redirect_to course_path(course_id)
