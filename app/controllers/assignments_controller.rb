@@ -1,14 +1,18 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_instructor!, except: [:show]
 
+  def index
+    @assignments = Assignment.where(course_id: params[:course_id])
+  end
+
   def show
     @assignment = Assignment.find(params[:id])
     return unless current_student
 
     enrollment = Enrollment.find_by(course_id: params[:course_id], student_id: current_student.id)
-    if enrollment.submissions.exists?(assignment_id: @assignment.id)
-      @submission_id = Submission.find_by(enrollment_id: enrollment.id, assignment_id: @assignment.id)
-    end
+    return unless enrollment.submissions.exists?(assignment_id: @assignment.id)
+
+    @submission_id = Submission.find_by(enrollment_id: enrollment.id, assignment_id: @assignment.id)
   end
 
   def new
@@ -20,18 +24,19 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new(params_for_assignment)
     @assignment.course = course
 
-    unless current_instructor == course.instructor
+    if current_instructor == course.instructor
+
+      if @assignment.save!
+        flash[:notice] = 'Assignment created successfully'
+        redirect_to course_assignment_path(course.id, @assignment.id)
+      else
+        flash[:error] = 'Failed to create assignment'
+        render :new
+      end
+    else
       flash[:error] = 'You are not authorized to create an assignment for this course'
       redirect_back(fallback_location: root_path)
-      return
-    end
-
-    if @assignment.save!
-      flash[:notice] = 'Assignment created successfully'
-      redirect_to course_assignment_path(course.id, @assignment.id)
-    else
-      flash[:error] = 'Failed to create assignment'
-      render :new
+      nil
     end
   end
 
