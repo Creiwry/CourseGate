@@ -1,5 +1,5 @@
 class ForumThreadsController < ApplicationController
-  before_action :authenticate_instructor!, except: [:index, :show]
+  before_action :authenticate_instructor!, except: %i[index show]
 
   def index
     @forum_threads = ForumThread.all
