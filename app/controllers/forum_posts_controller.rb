@@ -1,14 +1,6 @@
 class ForumPostsController < ApplicationController
   before_action :authenticate_student!, except: [:destroy]
 
-  def index
-    @forum_thread = ForumThread.find(params[:forum_thread_id])
-  end
-
-  def new
-    @forum_post = ForumPost.new
-  end
-
   def create
     @forum_thread = ForumThread.find(params[:forum_thread_id])
     @forum_post = ForumPost.new(
@@ -18,10 +10,10 @@ class ForumPostsController < ApplicationController
       )
     )
     if @forum_post.save!
-      flash[:notice] = "Post created successfully"
+      flash[:notice] = 'Post created successfully'
       redirect_to forum_thread_path(@forum_thread)
     else
-      flash[:notice] = "Failed to create post"
+      flash[:notice] = 'Failed to create post'
       render :new
     end
   end
@@ -46,11 +38,11 @@ class ForumPostsController < ApplicationController
   def destroy
     forum_post = ForumPost.find(params[:id])
     forum_thread_id = forum_post.forum_thread_id
-    if forum_post.destroy
-      flash[:notice] = 'Post has been deleted'
-    else
-      flash[:notice] = 'Failed to delete Post'
-    end
+    flash[:notice] = if forum_post.destroy
+                       'Post has been deleted'
+                     else
+                       'Failed to delete Post'
+                     end
     redirect_to forum_thread_path(forum_thread_id)
   end
 
