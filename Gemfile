@@ -73,7 +73,9 @@ group :development, :test do
   gem 'shoulda-matchers'
 
   # A library for generating fake data
+  gem 'better_errors', '~> 2.10'
   gem 'faker'
+  gem 'simplecov', '~> 0.22.0'
 end
 
 group :development do

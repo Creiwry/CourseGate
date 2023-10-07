@@ -1,5 +1,35 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start :rails do
+  add_filter %w[
+    app/channels
+    app/controllers/user_interests_controller.rb
+    app/jobs
+    app/mailers
+    app/views
+    lib/rails
+    lib/templates
+    app/controllers/users/
+    bin
+    coverage
+    log
+    test
+    vendor
+    node_modules
+    db
+    doc
+    public
+    storage
+    tmp
+  ]
+  add_group 'Models', 'app/models'
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Helpers', 'app/helpers'
+end
+
+puts 'Simplecov has started'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
