@@ -1,80 +1,57 @@
 <div class="heading text-center">
-  
-  <h1 class="center">CourseGate!</h1>
+  <h1 class="my-12 text-5xl center text-white violetTextShadow"><b>CourseGate!</b></h1>
 </div>
-<div class="container">
-  <div class="row">
-    <div id="course-list" class="col-sm  align-self-center course-list">
-      <div class="carousel slide" data-bs-ride="carousel">
-        
-        <div class="carousel-inner">
-         <%# ##TODO: make it so the first card doesn't repeat  %>
-          <div class="carousel-item card active">
-            <div class="card-body">
-              <h4 class="card-title">
-                <%= @courses.first.name %>
-              </h4>
-              <p class="card-text">
-                <%= @courses.first.description %>
-              </p>
-                <%=  link_to "Go to course", @courses.first, class:"card-link" %>
-              
-            </div>
-
-            
-          </div>
+<div class="mx-4 grid grid-cols-1 lg:grid-cols-2 gap-10 ">
+  <div class="shadow hover:shadow-2xl">
+    <div id="default-carousel" class="relative w-full mx-auto" data-carousel="slide">
+        <div class="relative h-72 overflow-hidden rounded-lg violetShadow">
           <% @courses.each do |course| %>
-
-            <div class="carousel-item card">
-              <div class="card-body">
-                <h4 class="card-title">
-                  <%= course.name %>
+            <div class="border my-2 rounded-lg violetShadow border-white hidden duration-1000 ease-in-out" data-carousel-item>
+              <div class="absolute block w-full px-4 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-black shadow hover:shadow-2xl shadow-violet-500/50">
+                <h4 class="m-2 text-2xl text-white">
+                  <b>
+                    <%= course.name %>
+                  </b>
                 </h4>
-                <p class="card-text">
+                <p class="m-2 mb-4">
                   <%= course.description %>
                 </p>
-                  <%=  link_to "Go to course", course, class:"card-link" %>
-                
+                  <%=  link_to "Go to course", course, class:"m-2 border border-white rounded hover:bg-yellow-600 p-2 shadow-lg shadow-yellow-600" %>
               </div>
-
-              
             </div>
           <% end %>
         </div>
-      </div>
-      
     </div>
-
-    <div id="introduction" class="col-sm align-self-center card">
-      <div id="introduction-text" class="card-body">
-        <h3 class="card-title">
+  </div>
+  <div>
+    <div id="introduction" class="h-72 col-sm violetShadow border rounded-lg border-white p-3 pt-8 pb-8">
+      <h3  class="m-2 text-3xl text-white">
+        <b>
           Introduction  
-        </h3>
+        </b>
+      </h3>
 
-        <p class="card-text">
+        <p class="m-2 mb-4">
         We believe that education should be a collective effort, so we've created a platform where instructors and learners come together to create an engaging learning experience.
         Explore a diverse range of courses, and participate in interactive discussions facilitated by both community members and expert instructors.
         Join us today and unlock a world of collaborative education at CourseGate!
         </p>
 
-        <%= link_to "About Us", :about_us, class:"card-link" %>
-        <%= link_to "FAQ Page", :faq, class:"card-link" %>
-      </div> 
+        <%= link_to "About Us", :about_us, class:"m-2  border border-white rounded hover:bg-yellow-600 p-2" %>
+        <%= link_to "FAQ Page", :faq, class:"m-2 border border-white rounded hover:bg-yellow-600 p-2" %>
     </div>
   </div>
 
-  <div class="row">
-    <div id="forum-threads-home-page" class="col-sm" >
-      <h3>Forum Threads</h3>
+  <div class="row px-6">
+    <div id="forum-threads-home-page" class="col-sm py-4" >
+      <h3 class="text-4xl text-white my-2"><b>Forum Threads</b></h3>
       <ul id="forum-threads" class="column-count-2">
         <% @forum_threads.each do |forum_thread| %>
-          <li>
-            <%= link_to forum_thread.title, forum_thread %>
+          <li class="">
+            <%= link_to forum_thread.title, forum_thread, class:"hover:text-yellow-600 p-2" %>
           </li>
         <% end %>
       </ul>
-
-      
     </div>
   </div>
 

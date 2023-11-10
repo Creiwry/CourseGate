@@ -6,27 +6,26 @@
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag 'template-js/functions.js' %>
   </head>
-  <body class="stretched">
-    
-    <div id="wrapper">
-      
+  <body class="stretched h-screen bg-black" >
+    <div class="m-0 bg-black text-white h-screen" id="wrapper">
       <%= render "layouts/navbar" %>
-
       <%= render "layouts/alerts" %>
-
-      <div style="height: 1000px">
+      <div class="" >
         <%= yield %>
       </div>
-
-      <footer>
-        <%= render "layouts/footer" %>
-      </footer>
-
+      <%= render "layouts/footer" %>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
   </body>
 </html>

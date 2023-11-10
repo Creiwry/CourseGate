@@ -7,7 +7,7 @@
 // Prefix for :root CSS variables
 $cnvs-prefix: cnvs- !default;
 
-$theme-color     :          #1abc9c;
+$theme-color     :          $white;
 $theme-color-rgb :          to-rgb($theme-color);
 $green : #3e5641;
 $contrast-0: 		$white;

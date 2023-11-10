@@ -1,6 +1,6 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 
-import "jquery"
+// import "jquery"
 import "@hotwired/turbo-rails"
 import "controllers"
 
@@ -45,4 +45,5 @@ import "controllers"
 // import "plugins.textrotator"
 // import "plugins.youtube"
 
-import "bootstrap"
+// import "bootstrap"
+Turbo.setFormMode("optin")
