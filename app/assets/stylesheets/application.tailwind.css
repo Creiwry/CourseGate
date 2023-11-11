@@ -35,3 +35,7 @@ h3,
 .violetShadow {
 	box-shadow: 0px 14px 55px rgba(109, 40, 217, 0.45);
 }
+
+input.fill-none, textarea.fill-none {
+  background-color: black !important;
+}

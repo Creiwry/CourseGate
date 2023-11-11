@@ -10,6 +10,6 @@ export default class extends Controller {
 
     const target = event.currentTarget;
     const editPartial = target.nextElementSibling;
-    editPartial.classList.toggle("d-none");
+    editPartial.classList.toggle("hidden");
   }
 }

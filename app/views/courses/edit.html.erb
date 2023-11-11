@@ -1,9 +1,22 @@
-<div class="container">
+<div class="my-4 flex flex-col items-center">
+  <h1 class="text-4xl">
+    <b>
+      Edit Course
+    </b>
+  </h1>
   <%= form_with(model: @course, url: course_path(@course.id), method: :patch) do |form| %>
-    <%= form.label :name, class: "form-label" %>
-    <%= form.text_field :name, placeholder: @course.name, class: "form-control" %>
-    <%= form.label :description, class: "form-label" %>
-    <%= form.text_area :description, placeholder: @course.description, class: "form-control" %>
-    <%= form.submit "Edit Course", class: "btn btn-primary"  %>
+    <div class="my-2">
+      <%= form.label :name, class: "form-label" %><br />
+      <%= form.text_field :name, placeholder: @course.name, class: "fill-none text-white border rounded-xl border-white" %>
+    </div>
+
+    <div class="my-2">
+      <%= form.label :description, class: "form-label" %><br />
+      <%= form.text_area :description, placeholder: @course.description, class: "fill-none text-white border rounded-xl border-white" %>
+    </div>
+
+    <div class="actions text-center mb-3">
+      <%= form.submit "Edit Course", class: "text-white border rounded-lg border-yellow-400 hover:cursor-pointer bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+    </div>
   <% end %>
 </div>

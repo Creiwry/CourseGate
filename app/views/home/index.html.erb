@@ -47,8 +47,8 @@
       <h3 class="text-4xl text-white my-2"><b>Forum Threads</b></h3>
       <ul id="forum-threads" class="column-count-2">
         <% @forum_threads.each do |forum_thread| %>
-          <li class="">
-            <%= link_to forum_thread.title, forum_thread, class:"hover:text-yellow-600 p-2" %>
+          <li class="my-2 border-b border-black hover:border-b hover:border-violet-800">
+            <%= link_to forum_thread.title, forum_thread, class:"p-2" %>
           </li>
         <% end %>
       </ul>
