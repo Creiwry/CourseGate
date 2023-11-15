@@ -64,7 +64,7 @@ RSpec.describe 'Assignments', type: :request do
 
       it 'raises an error' do
         post course_assignments_path(course_id: course.id, assignment: attributes_for(:assignment))
-        expect(flash[:error]).to eq('You are not authorized to create an assignment for this course')
+        expect(flash[:error]).to eq('You are not authorized to change this assignment')
       end
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe 'Assignments', type: :request do
       it 'raises an error' do
         patch course_assignment_path(course_id: course.id, id: assignment.id,
                                      assignment: attributes_for(:assignment, title: 'yello'))
-        expect(flash[:error]).to eq('You are not authorized to update this assignment')
+        expect(flash[:error]).to eq('You are not authorized to change this assignment')
       end
     end
   end
@@ -141,7 +141,7 @@ RSpec.describe 'Assignments', type: :request do
       it 'raises an error' do
         assignment
         delete course_assignment_path(course_id: course.id, id: assignment.id)
-        expect(flash[:error]).to eq('You are not authorized to delete this assignment')
+        expect(flash[:error]).to eq('You are not authorized to change this assignment')
       end
     end
   end
