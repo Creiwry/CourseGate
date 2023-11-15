@@ -1,32 +1,20 @@
-<section id="content">
-  <div class="content-wrap">
-    
-    <div class="container mw-md">
-      <h3 class="mt-5 mb-3 text-center"><%= @assignment.title %></h3>
-      <div class="card bg-secondary bg-opacity-10 border-0">
-        <div class="card-body p-4">
+<div class="my-4 flex flex-col items-center">
+  <h1 class="text-4xl">
+    <b>
+      <%= @assignment.title %>
+    </b>
+  </h1>
 
-          <div class="form-widget">
-            <div class="row">
-              
-              <%= form_with(model: @submission, url: course_assignment_submissions_path(params[:course_id], params[:assignment_id]), method: :post) do |form| %>
-                <div class="col-12 form-group">
-                  <%= form.label :content, class: "form-label" %>
-                  <%= form.text_area :content, placeholder: "Please enter your submission here", rows: 10, required: true, class: "form-control" %>
-                </div>
-
-                <div class="col-12">
-                  <%= form.submit "Submit", class:"button rounded w-100 bg-contrast-900 h-bg-dark m-0" %>
-                </div>
-              <% end %>
-            </div>
-            
-
-          </div>
-
-        </div>
-      </div>
+  <%= form_with(model: @submission, url: course_assignment_submissions_path(params[:course_id], params[:assignment_id]), method: :post) do |form| %>
+    <div class="my-2">
+      <%= form.label :content, class: "form-label" %><br />
+      <%= form.text_area :content, placeholder: "Please enter your submission here", rows: 10, required: true, class: "fill-none h-56 bg-none border rounded-xl border-white" %>
     </div>
 
-  </div>
-</section>
+    <div class="actions text-center mb-3">
+      <%= form.submit "Submit", class:"hover:cursor-pointer text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+    </div>
+  <% end %>
+</div>
+
+

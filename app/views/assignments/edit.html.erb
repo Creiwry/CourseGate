@@ -1,15 +1,27 @@
-<div>
-  <h1>Edit assignment</h1>
+<div class="my-4 flex flex-col items-center">
+  <h1 class="text-4xl">
+    <b>
+      Edit assignment
+    </b>
+  </h1>
   <%= form_with(model: @assignment, url: course_assignment_path(@assignment.course.id, @assignment.id), method: :patch) do |form| %>
-    <%= form.label :title, class: "form-label" %>
-    <%= form.text_field :title, placeholder: @assignment.title, class: "form-control" %>
-    <br>
-    <%= form.label :content, class: "form-label" %>
-    <%= form.text_area :content, placeholder: @assignment.content, class: "form-control" %>
-    <br>
-    <%= form.label :due_date, class: "form-label" %>
-    <%= form.datetime_field :due_date, placeholder: @assignment.due_date, class: "form-control" %>
-    <br>
-    <%= form.submit 'Submit', class: "btn btn-primary" %>
+    <div class="my-2">
+    <%= form.label :title, class: "form-label" %><br />
+    <%= form.text_field :title, placeholder: @assignment.title, class: "fill-none bg-none border rounded-xl border-white" %>
+    </div>
+
+    <div class="my-2">
+    <%= form.label :content, class: "form-label" %><br />
+    <%= form.text_area :content, placeholder: @assignment.content, class: "fill-none bg-none border rounded-xl border-white h-56" %>
+    </div>
+    
+    <div class="my-2">
+    <%= form.label :due_date, class: "form-label" %><br />
+    <%= form.datetime_field :due_date, placeholder: @assignment.due_date, class: "fill-none bg-none border rounded-xl border-white" %>
+    </div>
+
+    <div class="actions text-center mb-3">
+    <%= form.submit 'Submit', class: "hover:cursor-pointer text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+    </div>
   <% end %>
 </div>

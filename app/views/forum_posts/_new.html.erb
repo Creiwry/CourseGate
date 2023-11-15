@@ -1,10 +1,13 @@
-<div class="container">
+<div class="my-4 flex flex-col items-center">
   <%= form_with(model: @forum_post, url: forum_thread_forum_posts_path(@forum_thread), local: true) do |form| %>
     <%= form.hidden_field "forum_post[forum_thread_id]", value: params[:forum_thread_id] %>
-    <%= form.label "Write your post:", class: "form-label" %>
-    <br>
-    <%= form.text_area "forum_post[content]", class: "form-control w-50" %>
-    <br>
-    <%= form.submit "Post", class:"btn btn-primary" %>
+    <div>
+      <%= form.label "Write your post:", class: "my-4" %><br />
+      <%= form.text_area "forum_post[content]", class: "fill-none form-control w-50 border rounded-xl border-white" %>
+    </div>
+
+    <div class="actions text-center mb-3">
+      <%= form.submit "Post", class: "text-white hover:cursor-pointer border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+    </div>
   <% end %>
 </div>

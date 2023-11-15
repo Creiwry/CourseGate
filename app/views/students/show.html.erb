@@ -1,26 +1,28 @@
-<div class="container">
-  <h1>
+<div class="my-4 flex flex-col items-center">
+  <h1 class="text-4xl font-bold">
     <%= @student.name %>
   </h1>
-  <div class="container">
-    <h2>Courses</h2>
+  <div class="my-4">
+    <h2 class="text-2xl font-bold">Courses</h2>
     <ul>
       <% @student.courses.each do |course| %>
-        <li>
+        <li class="my-2 border-b border-black hover:border-b hover:border-violet-800">
           <%= link_to course.name, course_path(course.id) %>
         </li>
       <% end %>
     </ul>
   </div>
-  <div class="container">
-    <h2>Forum Posts</h2>
+  <div class="my-4 border rounded-lg border-white p-4">
+    <h2 class="text-2xl font-bold mb-3">Forum Posts</h2>
     <ul>
       <% @student.forum_posts.each do |forum_post| %> 
-        <div class="card">
+        <div class="card border-b border-violet-800 mb-3">
           <div class="card-content">
-            <%= forum_post.content %>
+            <%= "My most: #{forum_post.content}" %>
             <br>
-            <%= link_to forum_post.forum_thread.title, forum_thread_path(forum_post.forum_thread.id) %>
+            <li class="my-2 border-b border-black hover:border-b hover:border-violet-800">
+              <%= link_to "In Thread: #{forum_post.forum_thread.title}", forum_thread_path(forum_post.forum_thread.id) %>
+            </li>
           </div>
           <br>
         </div> 

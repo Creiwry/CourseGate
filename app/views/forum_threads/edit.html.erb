@@ -1,15 +1,25 @@
-
-<div class="container">
-  <h1>Edit Thread</h1>
+<div class="my-4 flex flex-col items-center">
+  <h1 class="text-4xl">
+    <b>
+      Edit Thread
+    </b>
+  </h1>
   <%= form_with(model: @forum_thread, url: forum_thread_path(@forum_thread.id), method: :patch) do |form| %>
     <%= form.hidden_field :course_id, value: @forum_thread.course_id %>
-    <%= form.label :title, class: "form-label"  %>
-    <%= form.text_field :title, placeholder: @forum_thread.title, class: "form-control"  %>
-    <br>
-    <%= form.label :description, class: "form-label"  %>
-    <%= form.text_area :description, placeholder: @forum_thread.description, class: "form-control" %>
-    <br>
-    <%= form.submit 'Edit Thread', class: "btn btn-primary" %>
+
+    <div class="my-2"><br />
+      <%= form.label :title, class: "form-label"  %>
+      <%= form.text_field :title, placeholder: @forum_thread.title, class: "fill-none border rounded-xl border-white" %>
+    </div>
+
+    <div class="my-2"><br />
+      <%= form.label :description, class: "form-label"  %>
+      <%= form.text_area :description, placeholder: @forum_thread.description, class: "fill-none border rounded-xl border-white" %>
+    </div>
+
+    <div class="actions text-center mb-3">
+      <%= form.submit 'Edit Thread', class: "text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+    </div>
   <% end %>
 </div>
 

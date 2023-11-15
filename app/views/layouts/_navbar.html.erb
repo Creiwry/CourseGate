@@ -1,57 +1,49 @@
-<div class="container-fluid mb-8">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div>
-      <a class="navbar-brand" href="#">CourseGate</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<style type="text/css" media="all">
+form {
+  margin-bottom: 0;
+} 
+</style>
+<div data-turbo="false" class="sticky inset-x-0 top-0 z-50">
+  <nav class="py-3 bg-black border-b border-violet-800 flex justify-between px-4">
+    <a class="mx-4 text-4xl text-white" href="#"><b>CourseGate</b></a>
+    <div id="dropdown-menu">
+      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-yellow-600 dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+      <div id="dropdown" class="z-10 hidden bg-black divide-y divide-yellow-400 border border-yellow-400 rounded-lg shadow w-44">
+        <ul class="py-2 text-sm text-white" aria-labelledby="dropdownDefaultButton">
+          <li class="text-black hover:text-white">
+            <a class="text-white hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" aria-current="page" href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <%= link_to "Courses", courses_path, class:"nav-link" %>
+          <li class="text-white dark:hover:text-white">
+            <%= link_to "Courses", courses_path, class:"hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Student Account
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= button_to("Profile", student_path(current_student.id), method: :get, class: "btn btn-primary") if current_student %>
-              <li><%= button_to("Sign in", new_student_session_path, class:"btn btn-primary" ) unless current_student %></li>
-              <li><%= button_to("Sign out", destroy_student_session_path, method: :delete, class:"btn btn-danger" ) %></li>
+          <li class="text-white hover:text-white">
+            <%= link_to "About Us", :about_us, class:"hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
+          </li>
+          <li class="text-white hover:text-white">
+            <%= link_to "FAQ", :faq, class:"hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
+          </li>
+          <hr class="h-px bg-yellow-400 border-0">
+          <div class="flex flex-col">
+            <p class="mx-3 mt-1"><b>Student Account</b></p>
+              <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Profile", student_path(current_student.id), method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white") if current_student %></li>
+              <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign in", new_student_session_path, class:"link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) unless current_student %></li>
+              <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign out", destroy_student_session_path, method: :delete, data: { turbo: true }, class:"link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) %></li>
               <% unless current_student %>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= button_to("Sign up", new_student_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                <li class=" hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign up", new_student_registration_path, method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) %></li>
               <% end %>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Instuctor Account
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= button_to("Profile", instructor_path(current_instructor.id), method: :get, class: "btn btn-primary") if current_instructor %>
-              <li><%= button_to("Sign in", new_instructor_session_path, class:"btn btn-primary" ) unless current_instructor %></li>
-              <li><%= button_to("Sign out", destroy_instructor_session_path, method: :delete, class:"btn btn-danger" ) %></li>
+              <hr class="h-px bg-yellow-400 border-0">
+              <p class="mx-3 mt-1"><b>Instructor Account</b></p>
+              <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Profile", instructor_path(current_instructor.id), method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white") if current_instructor %></li>
+              <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign in", new_instructor_session_path, class:"link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) unless current_instructor %></li>
+              <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign out", destroy_instructor_session_path, method: :delete, class:"link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) %></li>
               <% unless current_instructor %>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= button_to("Sign up", new_instructor_registration_path, method: :get, class: "btn btn-success" ) %></li>
+                <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign up", new_instructor_registration_path, method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) %></li>
               <% end %>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <%= link_to "About Us", :about_us, class:"nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "FAQ", :faq, class:"nav-link" %>
-          </li>
+          </div>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>

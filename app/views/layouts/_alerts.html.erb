@@ -1,12 +1,12 @@
-<div>
+<div class="mt-2">
   <% flash.each do |name, type| %>
     <% puts "name:  #{name}, type:  #{type}" %>
     <% if name == "notice" %>
-      <%= content_tag :div, type, :class => "notice alert-primary flash_name#{name}", :role => "notice" %>
+      <%= content_tag :div, type, :class => "p-4 border text-center font-bold rounded-lg border-green-800 text-green-600 flash_name#{name}", :role => "notice" %>
     <% elsif name == "alert" || name == "error" %>
-      <%= content_tag :div, type, :class => "alert alert-danger flash_name#{name}", :role => "alert" %>
+      <%= content_tag :div, type, :class => "p-4 border text-center font-bold rounded-lg border-rose-800 text-rose-600 flash_name#{name}", :role => "alert" %>
     <% else %>
-      <%= content_tag :div, type, :class => "alert alert-warning flash_name#{name}", :role => "warning" %>
+      <%= content_tag :div, type, :class => "p-4 border text-center font-bold rounded-lg border-yellow-800 text-yellow-600  flash_name#{name}", :role => "warning" %>
     <% end %>
   <% end %>
 </div>
