@@ -1,15 +1,4 @@
 class MaterialsController < ApplicationController
-  # def index
-  #   course = Course.find(params[:course_id])
-
-  #   unless current_student && current_student.enrollments.includes(course) || current_instructor == course.instructor
-  #     flash[:error] = 'You do not have access to these materials'
-  #     redirect_back(fallback_location: root_path)
-  #     return
-  #   end
-
-  #   @materials = Material.where(course_id: course.id)
-  # end
 
   def show
     @material = Material.find(params[:id])
