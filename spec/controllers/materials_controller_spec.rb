@@ -51,7 +51,7 @@ RSpec.describe MaterialsController, type: :controller do
 
       it 'will raise an error' do
         post :create, params: { course_id: course.id, material: attributes_for(:material, course_id: course.id) }
-        expect(flash[:error]).to eq('You are not authorized to create this material')
+        expect(flash[:error]).to eq('You are not authorized to change this material')
       end
     end
   end
@@ -85,7 +85,7 @@ RSpec.describe MaterialsController, type: :controller do
 
       it 'will fail raise an error' do
         patch :update, params: { course_id: course.id, id: material.id, material: attributes_for(:material) }
-        expect(flash[:error]).to eq('You are not authorized to edit this material')
+        expect(flash[:error]).to eq('You are not authorized to change this material')
       end
     end
   end
@@ -120,7 +120,7 @@ RSpec.describe MaterialsController, type: :controller do
         material.save
 
         delete :destroy, params: { course_id: course.id, id: material.id }
-        expect(flash[:error]).to eq('You are not authorized to delete this material')
+        expect(flash[:error]).to eq('You are not authorized to change this material')
       end
     end
   end

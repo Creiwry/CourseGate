@@ -62,13 +62,13 @@ RSpec.describe ForumThreadsController, type: :controller do
     end
     it 'updates the forum thread' do
       new_name = 'New Forum Thread Name'
-      patch :update, params: { id: forum_thread.id, forum_thread: { title: new_name } }
+      patch :update, params: { id: forum_thread.id, forum_thread: { title: new_name, course_id: forum_thread.course.id } }
       forum_thread.reload
       expect(forum_thread.title).to eq(new_name)
     end
 
     it 'redirects to the forum thread' do
-      patch :update, params: { id: forum_thread.id, forum_thread: attributes_for(:forum_thread) }
+      patch :update, params: { id: forum_thread.id, forum_thread: { title: 'newer name', course_id: forum_thread.course.id } }
       expect(response).to redirect_to(forum_thread)
     end
   end
@@ -81,13 +81,13 @@ RSpec.describe ForumThreadsController, type: :controller do
       forum_thread
 
       expect do
-        delete :destroy, params: { id: forum_thread.id }
+        delete :destroy, params: { id: forum_thread.id, forum_thread: { course_id: forum_thread.course.id } }
       end.to change(ForumThread, :count).by(-1)
     end
 
     it 'redirects to the forum threads list' do
       forum_thread
-      delete :destroy, params: { id: forum_thread.id }
+      delete :destroy, params: { id: forum_thread.id, forum_thread: { course_id: forum_thread.course.id } }
       expect(response).to redirect_to(forum_threads_url)
     end
   end

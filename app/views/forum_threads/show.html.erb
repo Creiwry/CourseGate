@@ -24,7 +24,7 @@
       <div class="flex justify-center">
         <% if current_instructor == @forum_thread.course.instructor %>
           <%= link_to "Edit", edit_forum_thread_path(@forum_thread.id), class: "text-white m-2 border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
-          <%= button_to "Delete", forum_thread_path(@forum_thread.id), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this thread?" }, class: "text-white m-2 border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+          <%= button_to "Delete", forum_thread_path(@forum_thread.id, forum_thread: { course_id: @forum_thread.course.id}), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this thread?" }, class: "text-white m-2 border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
         <% end %>
       </div>
     </div>
