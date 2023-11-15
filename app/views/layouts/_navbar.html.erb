@@ -11,21 +11,21 @@ form {
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
         </svg>
       </button>
-      <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-400 rounded-lg shadow w-44 dark:bg-gray-700">
-        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+      <div id="dropdown" class="z-10 hidden bg-black divide-y divide-yellow-400 border border-yellow-400 rounded-lg shadow w-44">
+        <ul class="py-2 text-sm text-white" aria-labelledby="dropdownDefaultButton">
           <li class="text-black hover:text-white">
-            <a class="text-black hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" aria-current="page" href="/">Home</a>
+            <a class="text-white hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" aria-current="page" href="/">Home</a>
           </li>
-          <li class="text-black dark:hover:text-white">
-            <%= link_to "Courses", courses_path, class:"text-black hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
+          <li class="text-white dark:hover:text-white">
+            <%= link_to "Courses", courses_path, class:"hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
           </li>
-          <li class="text-black hover:text-white">
-            <%= link_to "About Us", :about_us, class:"text-black hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
+          <li class="text-white hover:text-white">
+            <%= link_to "About Us", :about_us, class:"hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
           </li>
-          <li class="text-black hover:text-white">
-            <%= link_to "FAQ", :faq, class:"text-black hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
+          <li class="text-white hover:text-white">
+            <%= link_to "FAQ", :faq, class:"hover:text-white block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" %>
           </li>
-          <hr>
+          <hr class="h-px bg-yellow-400 border-0">
           <div class="flex flex-col">
             <p class="mx-3 mt-1"><b>Student Account</b></p>
               <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Profile", student_path(current_student.id), method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white") if current_student %></li>
@@ -34,7 +34,7 @@ form {
               <% unless current_student %>
                 <li class=" hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign up", new_student_registration_path, method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) %></li>
               <% end %>
-              <hr>
+              <hr class="h-px bg-yellow-400 border-0">
               <p class="mx-3 mt-1"><b>Instructor Account</b></p>
               <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Profile", instructor_path(current_instructor.id), method: :get, class: "link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white") if current_instructor %></li>
               <li class="hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"><%= button_to("Sign in", new_instructor_session_path, class:"link block px-4 py-2 hover:bg-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" ) unless current_instructor %></li>

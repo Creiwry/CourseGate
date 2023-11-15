@@ -11,12 +11,12 @@
 
     <div class="my-2">
       <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"text-white border rounded-xl border-white"  %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"fill-none text-white border rounded-xl border-white"  %>
     </div>
 
     <div class="my-2 field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"text-white border rounded-xl border-white"  %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"fill-none text-white border rounded-xl border-white"  %>
     </div>
 
     <div class="my-2 field">
@@ -24,16 +24,16 @@
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class:"text-white border rounded-xl border-white"  %>
+      <%= f.password_field :password, autocomplete: "new-password", class:"fill-none text-white border rounded-xl border-white"  %>
     </div>
 
     <div class="my-2 field">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"text-white border rounded-xl border-white"  %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"fill-none text-white border rounded-xl border-white"  %>
     </div>
 
     <div class="actions text-center mb-3">
-      <%= f.submit "Sign up", class:"text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+      <%= f.submit "Sign up", class:"hover:cursor-pointer text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
     </div>
   <% end %>
 

@@ -1,35 +1,40 @@
-<div class="container">
-  <h1><%= @assignment.title %></h1>
-  <div class="assignment-content">
-    <%= @assignment.content %>
+<div class="my-40">
+  <h3 class="text-3xl text-center"><b><%= @assignment.title %></b></h3>
+  <div class="text-center" >
+    <p>
+      <%= @assignment.content %>
+    </p>
   </div>
-  <br>
-  <div>
+  <div class="text-center" >
+    <p>
     Due Date: 
-    <%= @assignment.due_date.strftime("%H:%M %d/%m/%Y") %>
+      <%= @assignment.due_date.strftime("%H:%M %d/%m/%Y") %>
+    </p>
   </div>
   <br>
-  <% if current_instructor && current_instructor == @assignment.course.instructor %>
-    <%= link_to "Edit assignment", edit_course_assignment_path(params[:course_id], @assignment.id), class: "btn btn-warning" %>
-  <% end %>
-  <br>
-  <% if current_student && @submission_id %>
-    <%= link_to "My submission", course_assignment_submission_path(params[:course_id], @assignment.id, @submission_id), class: "btn btn-primary" %>
-  <% elsif current_student && current_student.enrollments.exists?(course: @assignment.course) %>
-    <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id), class: "btn btn-primary" %>
-  <% elsif current_instructor && current_instructor == @assignment.course.instructor %>
-    <br>
-    <div id="submissions">
-      <h4>Submissions:</h4>
-      <ul>
-        <% @assignment.submissions.each do |submission| %>
-          <li>
-            <%= link_to submission.enrollment.student.name, course_assignment_submission_path(params[:course_id], params[:id], submission.id) %>
-            -- Score: <%= submission.score || "NA" %>
-          </li>
-        <% end %>
-        
-      </ul>
-    </div>
-  <% end %>
+  <div class="flex flex-row justify-center my-3">
+    <% if current_instructor && current_instructor == @assignment.course.instructor %>
+      <%= link_to "Edit assignment", edit_course_assignment_path(params[:course_id], @assignment.id), class: "text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800 mx-2" %>
+    <% end %>
+  </div>
+  <div class="flex flex-row justify-center my-3">
+    <% if current_student && @submission_id %>
+      <%= link_to "My submission", course_assignment_submission_path(params[:course_id], @assignment.id, @submission_id), class: "text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800 mx-2" %>
+    <% elsif current_student && current_student.enrollments.exists?(course: @assignment.course) %>
+      <%= link_to "Submit assignment", new_course_assignment_submission_path(@assignment.course.id, @assignment.id), class: "text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800 mx-2" %>
+    <% elsif current_instructor && current_instructor == @assignment.course.instructor %>
+      <br>
+      <div id="submissions">
+        <h4 class="text-2xl text-center">Submissions:</h4>
+        <ul>
+          <% @assignment.submissions.each do |submission| %>
+            <li class="border border-violet-800 rounded-lg p-2">
+              <%= link_to submission.enrollment.student.name, course_assignment_submission_path(params[:course_id], params[:id], submission.id), class:"border-b border-violet-800" %>
+              -- Score: <%= submission.score || "NA" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 </div>

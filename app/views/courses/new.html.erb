@@ -7,16 +7,16 @@
   <%= form_with(model: @course, url: courses_path, method: :post) do |form| %>
     <div class="my-2">
       <%= form.label :name %><br />
-      <%= form.text_field :name, placeholder: "Enter name", class: "bg-none border rounded-xl border-white" %>
+      <%= form.text_field :name, placeholder: "Enter name", class: "fill-none border rounded-xl border-white" %>
     </div>
 
     <div class="my-2">
       <%= form.label :description %><br />
-      <%= form.text_area :description, placeholder: "Enter description", class: "bg-none border rounded-xl border-white" %>
+      <%= form.text_area :description, placeholder: "Enter description", class: "fill-none border rounded-xl border-white" %>
     </div>
 
     <div class="actions text-center mb-3">
-      <%= form.submit "Create Course", class: "text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
+      <%= form.submit "Create Course", class: "hover:cursor-pointer text-white border rounded-lg border-yellow-400 bg-black-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-yellow-600 dark:focus:ring-yellow-800" %>
     </div>
   <% end %>
 </div>
