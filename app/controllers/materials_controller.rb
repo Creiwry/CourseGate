@@ -1,46 +1,33 @@
-class MaterialsController < ApplicationController
+# frozen_string_literal: true
 
-  def show
-    @material = Material.find(params[:id])
-  end
+## MaterialsController handles the management of the study materials
+# for courses
+##
+class MaterialsController < ApplicationController
+  before_action :set_material, except: %i[new create]
+  before_action :check_current_instructor, only: %i[update destroy create]
+
+  def show; end
 
   def new
     @material = Material.new
   end
 
   def create
-    course = Course.find(params_for_material[:course_id])
-
-    unless current_instructor == course.instructor
-      flash[:error] = 'You are not authorized to create this material'
-      redirect_back(fallback_location: root_path)
-      return
-    end
-
     @material = Material.new(params_for_material)
 
     if @material.save!
       flash[:notice] = 'Material created successfully'
-      redirect_to course_material_path(course.id, @material.id)
+      redirect_to course_material_path(@material.course.id, @material.id)
     else
       flash[:error] = 'Failed to create material'
       render :new
     end
   end
 
-  def edit
-    @material = Material.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @material = Material.find(params[:id])
-
-    unless current_instructor == @material.course.instructor
-      flash[:error] = 'You are not authorized to edit this material'
-      redirect_back(fallback_location: root_path)
-      return
-    end
-
     if @material.update(params_for_material)
       flash[:notice] = 'Material updated successfully'
       redirect_to course_material_path(@material.course.id, @material.id)
@@ -51,14 +38,7 @@ class MaterialsController < ApplicationController
   end
 
   def destroy
-    @material = Material.find(params[:id])
     course = @material.course
-
-    unless current_instructor == @material.course.instructor
-      flash[:error] = 'You are not authorized to delete this material'
-      redirect_back(fallback_location: root_path)
-      return
-    end
 
     if @material.destroy
       flash[:notice] = 'Material deleted successfully'
@@ -71,7 +51,19 @@ class MaterialsController < ApplicationController
 
   private
 
+  def set_material
+    @material = Material.find(params[:id])
+  end
+
   def params_for_material
     params.require(:material).permit(:course_id, :title, :content)
+  end
+
+  def check_current_instructor
+    course = Course.find(params[:course_id])
+    return if current_instructor == course.instructor
+
+    flash[:error] = 'You are not authorized to change this material'
+    redirect_back(fallback_location: root_path)
   end
 end
