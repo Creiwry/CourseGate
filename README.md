@@ -14,8 +14,8 @@ Course Gate is a web application that allows students to enroll in courses and i
 
 - Ruby on Rails: A web development framework used for building the application.
 - PostgreSQL: The database management system for storing application data.
-- Bootstrap: A front-end framework for responsive and attractive user interface design.
-- Faker: A gem used for generating sample data for testing and development purposes.
+- Tailwind: A front-end framework for responsive and attractive user interface design.
+- Stimulus: a rails-like integration of javascript code into the frontend.
 
 ## Getting Started
 
