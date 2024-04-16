@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+## CoursesController handles the management of the Courses
+#
+##
 class CoursesController < ApplicationController
   before_action :authenticate_instructor!, except: %i[index show]
 
