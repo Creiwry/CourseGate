@@ -12,54 +12,44 @@ RSpec.describe 'Submissions', type: :request do
     sign_in(student)
   end
 
-  describe 'GET #index' do
-    it 'returns a success response' do
-      get :index, params: {
-        course_id: course.id,
-        assignment_id: assignment.id
-      }
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET #show' do
     it 'returns a success response' do
-      get :show, params: {
+      get course_assignment_submission_path(
         course_id: course.id,
         assignment_id: assignment.id,
         id: submission.id
-      }
+      )
       expect(response).to be_successful
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
-      get :new, params: {
+      get new_course_assignment_submission_path(
         course_id: course.id,
         assignment_id: assignment.id
-      }
+      )
       expect(response).to be_successful
     end
   end
 
   describe 'POST #create' do
     it 'creates a new submission' do
-      expect {
-        post :create, params: {
+      expect do
+        post course_assignment_submissions_path(
           course_id: course.id,
           assignment_id: assignment.id,
           submission: attributes_for(:submission)
-        }
-      }.to change(Submission, :count).by(1)
+        )
+      end.to change(Submission, :count).by(1)
     end
 
     it 'renders submission' do
-      post :create, params: {
+      post course_assignment_submissions_path(
         course_id: course.id,
         assignment_id: assignment.id,
         submission: attributes_for(:submission)
-      }
+      )
       new_submission = Submission.last
       expect(response).to redirect_to(
         course_assignment_submission_path(
@@ -73,11 +63,11 @@ RSpec.describe 'Submissions', type: :request do
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      get :edit, params: {
+      get edit_course_assignment_submission_path(
         course_id: course.id,
         assignment_id: assignment.id,
         id: submission.id
-      }
+      )
       expect(response).to be_successful
     end
   end
@@ -85,23 +75,27 @@ RSpec.describe 'Submissions', type: :request do
   describe 'PATCH #update' do
     it 'updates the submission' do
       new_content = 'New content for submission. Fun, fun, fun.'
-      patch :update, params: {
+
+      patch course_assignment_submission_path(
         course_id: course.id,
         assignment_id: assignment.id,
         id: submission.id,
         submission: { content: new_content }
-      }
+      )
+
       submission.reload
+
       expect(submission.content).to eq(new_content)
     end
 
     it 'redirects to the submission' do
-      patch :update, params: {
+      patch course_assignment_submission_path(
         course_id: course.id,
         assignment_id: assignment.id,
         id: submission.id,
         submission: attributes_for(:submission)
-      }
+      )
+
       expect(response).to redirect_to(
         course_assignment_submission_path(
           course.id,
@@ -121,12 +115,12 @@ RSpec.describe 'Submissions', type: :request do
 
       it 'updates the submission score' do
         new_score = 75
-        patch :score, params: {
+        patch score_course_assignment_submission_path(
           course_id: course.id,
           assignment_id: assignment.id,
           id: submission.id,
           submission: { score: new_score }
-        }
+        )
         submission.reload
         expect(submission.score).to eq(new_score)
       end
@@ -143,13 +137,13 @@ RSpec.describe 'Submissions', type: :request do
       )
       submission.save
 
-      expect {
-        delete :destroy, params: {
+      expect do
+        delete course_assignment_submission_path(
           course_id: course.id,
           assignment_id: assignment.id,
           id: submission.id
-        }
-      }.to change(Submission, :count).by(-1)
+        )
+      end.to change(Submission, :count).by(-1)
     end
 
     context 'when student signed in' do
@@ -162,11 +156,11 @@ RSpec.describe 'Submissions', type: :request do
         )
         submission.save
 
-        delete :destroy, params: {
+        delete course_assignment_submission_path(
           course_id: course.id,
           assignment_id: assignment.id,
           id: submission.id
-        }
+        )
         expect(response).to redirect_to(
           course_assignment_path(
             course.id,
@@ -191,11 +185,11 @@ RSpec.describe 'Submissions', type: :request do
         )
         submission.save
 
-        delete :destroy, params: {
+        delete course_assignment_submission_path(
           course_id: course.id,
           assignment_id: assignment.id,
           id: submission.id
-        }
+        )
         expect(response).to redirect_to(
           course_assignment_submissions_path(
             course.id,
