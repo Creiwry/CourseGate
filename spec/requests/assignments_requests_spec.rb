@@ -63,7 +63,7 @@ RSpec.describe 'Assignments', type: :request do
       end
 
       it 'asks user to sign in' do
-        get new_course_assignments_path(course_id: course.id)
+        get new_course_assignment_path(course_id: course.id)
         expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
       end
     end
