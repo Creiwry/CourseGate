@@ -11,13 +11,13 @@ RSpec.describe "Enrollments", type: :request do
 
   describe 'POST #create' do
     it 'creates a new enrollment' do
-      expect {
-        post :create, params: { enrollment: {course_id: course.id}, student_id: student.id }
-      }.to change(Enrollment, :count).by(1)
+      expect do
+        post enrollments_path, params: { enrollment: {course_id: course.id}, student_id: student.id }
+      end.to change(Enrollment, :count).by(1)
     end
 
     it 'redirects to the enrolled course' do
-      post :create, params: { enrollment: { course_id: course.id, student_id: student.id } }
+      post enrollments_path, params: { enrollment: { course_id: course.id, student_id: student.id } }
       created_enrollment = Enrollment.last
       expect(response).to redirect_to(created_enrollment.course)
     end
@@ -26,14 +26,14 @@ RSpec.describe "Enrollments", type: :request do
   describe 'DELETE #destroy' do
     it 'destroys the enrollment' do
       enrollment
-      expect {
-        delete :destroy, params: { id: enrollment.id }
-      }.to change(Enrollment, :count).by(-1)
+      expect do
+        delete enrollment_path(enrollment.id)
+      end.to change(Enrollment, :count).by(-1)
     end
 
     it 'redirects to the course' do
       course = enrollment.course
-      delete :destroy, params: { id: enrollment.id }
+      delete enrollment_path(enrollment.id)
       expect(response).to redirect_to(course)
     end
   end
