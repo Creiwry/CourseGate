@@ -6,13 +6,7 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_instructor!, only: [:score]
   before_action :check_current_instructor, only: [:score]
-  before_action :set_submission, except: %i[new create index]
-
-  def index
-    enrollment = Enrollment.find_by(course_id: params[:course_id], student_id: current_student.id)
-    @submission_of_student = Submission.find_by(enrollment: enrollment.id)
-    @submissions = Submission.where(assignment_id: params[:assignment_id])
-  end
+  before_action :set_submission, except: %i[new create]
 
   def show; end
 
