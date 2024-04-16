@@ -2,17 +2,49 @@ require 'spec_helper'
 
 RSpec.describe 'Assignments', type: :request do
   let(:assignment) { create(:assignment) }
+  let(:student) { create(:student) }
   let(:course) { assignment.course }
   let(:instructor) { course.instructor }
   let(:instructor_not_of_course) { create(:instructor) }
 
   describe 'GET #index' do
-    before do
-      sign_in(instructor)
+    context 'when no one is signed in' do
+      it "redirects to sign in page" do
+        get course_assignments_path(course_id: course.id)
+        expect(response).to redirect_to(new_instructor_session_path)
+      end
+
+      it 'asks user to sign in' do
+        get course_assignments_path(course_id: course.id)
+        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+      end
     end
-    it 'returns a success response' do
-      get course_assignments_path(course_id: course.id)
-      expect(response).to be_successful
+
+    context 'when student is signed in' do
+      before do
+        sign_in(student)
+      end
+
+      it 'redirects to sign in page' do
+        get course_assignments_path(course_id: course.id)
+        expect(response).to redirect_to(new_instructor_session_path)
+      end
+
+      it 'asks user to sign in' do
+        get course_assignments_path(course_id: course.id)
+        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+      end
+    end
+
+    context 'when the correct instructor is signed in' do
+      before do
+        sign_in(instructor)
+      end
+
+      it 'returns a success response' do
+        get course_assignments_path(course_id: course.id)
+        expect(response).to be_successful
+      end
     end
   end
 
@@ -24,12 +56,43 @@ RSpec.describe 'Assignments', type: :request do
   end
 
   describe 'GET #new' do
-    before do
-      sign_in(instructor)
+    context 'when no one is signed in' do
+      it "redirects to sign in page" do
+        get new_course_assignment_path(course_id: course.id)
+        expect(response).to redirect_to(new_instructor_session_path)
+      end
+
+      it 'asks user to sign in' do
+        get new_course_assignments_path(course_id: course.id)
+        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+      end
     end
-    it 'returns a success response' do
-      get new_course_assignment_path(course_id: course.id)
-      expect(response).to be_successful
+
+    context 'when student is signed in' do
+      before do
+        sign_in(student)
+      end
+
+      it 'redirects to sign in page' do
+        get new_course_assignment_path(course_id: course.id)
+        expect(response).to redirect_to(new_instructor_session_path)
+      end
+
+      it 'asks user to sign in' do
+        get new_course_assignment_path(course_id: course.id)
+        expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
+      end
+    end
+
+    context 'when the correct instructor is signed in' do
+      before do
+        sign_in(instructor)
+      end
+
+      it 'returns a success response' do
+        get new_course_assignment_path(course_id: course.id)
+        expect(response).to be_successful
+      end
     end
   end
 
@@ -56,6 +119,7 @@ RSpec.describe 'Assignments', type: :request do
         sign_out(instructor)
         sign_in(instructor_not_of_course)
       end
+
       it 'does not create course' do
         expect do
           post course_assignments_path(course_id: course.id, assignment: attributes_for(:assignment))
