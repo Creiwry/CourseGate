@@ -32,7 +32,9 @@ class ForumThreadsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @forum_thread = ForumThread.find(params[:id])
+  end
 
   def update
     @forum_thread = ForumThread.find(params[:id])

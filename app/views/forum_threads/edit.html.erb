@@ -5,7 +5,7 @@
     </b>
   </h1>
   <%= form_with(model: @forum_thread, url: forum_thread_path(@forum_thread.id), method: :patch) do |form| %>
-    <%= form.hidden_field [:forum_thread][:course_id], value: @forum_thread.course_id %>
+    <%= form.hidden_field "forum_thread[:course_id]", value: @forum_thread.course_id %>
 
     <div class="my-2"><br />
       <%= form.label :title, class: "form-label"  %>
